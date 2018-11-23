@@ -1,16 +1,17 @@
 package com.vaja.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.GridPoint2;
-import com.vaja.game.Setting;
 import com.vaja.game.Vaja;
 import com.vaja.game.controller.PlayerController;
 import com.vaja.game.model.*;
+import com.vaja.game.model.actor.Actor;
+import com.vaja.game.model.world.World;
+import com.vaja.game.model.world.WorldObj;
 import com.vaja.util.AnimationSet;
 
 public class GameScreen extends AbstractScreen {

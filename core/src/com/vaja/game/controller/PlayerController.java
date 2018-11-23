@@ -2,7 +2,7 @@ package com.vaja.game.controller;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.vaja.game.model.Actor;
+import com.vaja.game.model.actor.Actor;
 import com.vaja.game.model.DIRECTION;
 
 public class PlayerController extends InputAdapter {

@@ -1,5 +1,8 @@
 package com.vaja.game.model;
 
+import com.vaja.game.model.actor.Actor;
+import com.vaja.game.model.world.WorldObj;
+
 public class Tile {
 
     private Actor actor;

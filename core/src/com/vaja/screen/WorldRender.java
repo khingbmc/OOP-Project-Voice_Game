@@ -4,10 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import com.vaja.game.Setting;
 import com.vaja.game.model.*;
+import com.vaja.game.model.actor.Actor;
+import com.vaja.game.model.world.World;
+import com.vaja.game.model.world.WorldObj;
 
 import java.util.ArrayList;
 import java.util.Collections;
