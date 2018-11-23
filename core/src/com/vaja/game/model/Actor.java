@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.vaja.util.AnimationSet;
 
-public class Actor {
+public class Actor implements YSortable {
     private int x, y;
     private DIRECTION facing;
 
@@ -14,7 +14,7 @@ public class Actor {
     //what would player from and what would player go
     private int srcX, srcY, destX, destY;
     private float animTimer; //what the animation pass the time
-    private float ANIM_TIME = 0.5f; //what the animation time set
+    private float ANIM_TIME = 0.3f; //what the animation time set
 
     private float walkTimer;
     private boolean moveRequestThisFrame;
@@ -39,7 +39,7 @@ public class Actor {
         this.animationSet = animations;
 
 
-        map.getTile(x, y).setActor(this);
+//        map.getTile(x, y).setActor(this);
         this.state = ACTOR_STATE.STANDING;
         this.facing = DIRECTION.SOUTH;
     }
@@ -60,6 +60,15 @@ public class Actor {
         y+direction.getDy() >= map.getHeight() || y+direction.getDy() <0) return false;
 
         if(map.getTile(direction.getDx()+x, direction.getDy()+y).getActor() != null) return false;
+
+        if(map.getTile(x+direction.getDx(), y+direction.getDy()).getObject() != null){
+            WorldObj obj = map.getTile(x+direction.getDx(), y+direction.getDy()).getObject();
+            if(!obj.isCanWalk()){
+                return false;
+            }
+        }
+
+
         //init move before update map
         initMove(direction);
 
@@ -71,18 +80,25 @@ public class Actor {
         return true;
     }
 
+
+
     public void update(float delta){
         if(state == ACTOR_STATE.WALKING){
             animTimer += delta;
             walkTimer +=delta;
+            //System.out.println(animTimer/ANIM_TIME);
             this.worldX = Interpolation.linear.apply(srcX, destX, animTimer/ANIM_TIME);
             this.worldY = Interpolation.linear.apply(srcY, destY, animTimer/ANIM_TIME);
             if(animTimer > ANIM_TIME){
                 float leftOverTime = animTimer-ANIM_TIME;
-                walkTimer -= leftOverTime;
+
                 finishMove();
                 if(moveRequestThisFrame){
-                    move(facing);
+                    if(move(facing)){
+                        animTimer += leftOverTime;
+                        worldY = Interpolation.linear.apply(srcY, destY, animTimer/ANIM_TIME);
+                        worldX = Interpolation.linear.apply(srcX, destX, animTimer/ANIM_TIME);
+                    }
                 }else{
                     walkTimer = 0f;
                 }
@@ -136,5 +152,15 @@ public class Actor {
             return animationSet.getStanding(facing);
         }
         return animationSet.getStanding(DIRECTION.SOUTH);
+    }
+
+    @Override
+    public float getSizeX() {
+        return 1.5f;
+    }
+
+    @Override
+    public float getSizeY() {
+        return 2;
     }
 }

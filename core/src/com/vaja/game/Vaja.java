@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.vaja.screen.GameScreen;
 
@@ -16,6 +17,9 @@ public class Vaja extends Game {
     public void create() {
         asset = new AssetManager();
         asset.load("res/graphics_unpacked/tiles_packed/textures.atlas", TextureAtlas.class);
+        asset.load("res/graphics_unpacked/tiles/grass1.png", Texture.class);
+        asset.load("res/graphics_unpacked/tiles/grass2.png", Texture.class);
+        asset.load("res/graphics_unpacked/tiles_packed/textures.png", Texture.class);
         asset.finishLoading();
 
         screen = new GameScreen(this);

@@ -6,6 +6,8 @@ public class Tile {
 
     private TERRAIN terrain;
 
+    private WorldObj object;
+
     public Tile(TERRAIN terrain){
         this.terrain = terrain;
     }
@@ -17,6 +19,14 @@ public class Tile {
 
     public Actor getActor() {
         return actor;
+    }
+
+    public WorldObj getObject() {
+        return object;
+    }
+
+    public void setObject(WorldObj object) {
+        this.object = object;
     }
 
     public void setActor(Actor actor) {

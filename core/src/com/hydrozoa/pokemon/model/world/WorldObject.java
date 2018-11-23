@@ -61,7 +61,7 @@ public class WorldObject implements YSortable {
 		}
 		this.walkable = walkable;
 	}
-	
+
 	public WorldObject(int x, int y, boolean walkable, Animation animation, float sizeX, float sizeY, GridPoint2[] tiles) {
 		this.x = x;
 		this.y = y;

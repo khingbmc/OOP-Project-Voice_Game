@@ -7,7 +7,7 @@ import com.vaja.game.model.DIRECTION;
 
 public class PlayerController extends InputAdapter {
 
-    private boolean up, down, left, right;
+    private boolean up, down, left, right, run;
 
     private Actor player;
 
@@ -19,15 +19,19 @@ public class PlayerController extends InputAdapter {
     public boolean keyDown(int keycode) {
         if(keycode == Input.Keys.UP){
             up = true;
+
         }
         if(keycode == Input.Keys.DOWN){
             down = true;
+
         }
         if(keycode == Input.Keys.LEFT){
             left = true;
+
         }
         if(keycode == Input.Keys.RIGHT){
             right = true;
+
         }
         return false;
     }
@@ -36,21 +40,26 @@ public class PlayerController extends InputAdapter {
     public boolean keyUp(int keycode) {
         if(keycode == Input.Keys.UP){
             up = false;
+
         }
         if(keycode == Input.Keys.DOWN){
             down = false;
+
         }
         if(keycode == Input.Keys.LEFT){
             left = false;
+
         }
         if(keycode == Input.Keys.RIGHT){
             right = false;
+
         }
         return false;
     }
     public void update(float delta){
         if(up){
-            player.move(DIRECTION.NORTH);
+            if(this.run == false) player.move(DIRECTION.NORTH);
+
             return;
         }
         if(down){

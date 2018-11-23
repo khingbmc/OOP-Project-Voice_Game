@@ -88,8 +88,10 @@ public class WorldRenderer {
 		
 		Collections.sort(forRendering, new WorldObjectYComparator());
 		Collections.reverse(forRendering);
+
 		
 		for (YSortable loc : forRendering) {
+			System.out.println(loc.getSizeX());
 			if (loc instanceof Actor) {
 				Actor a = (Actor)loc;
 				if (!a.isVisible()) {

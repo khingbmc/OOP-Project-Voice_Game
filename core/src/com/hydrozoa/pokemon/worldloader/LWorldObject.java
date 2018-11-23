@@ -2,6 +2,10 @@ package com.hydrozoa.pokemon.worldloader;
 
 import com.badlogic.gdx.math.GridPoint2;
 
+/**
+ * this class can get obj in test map txt
+ */
+
 public class LWorldObject {
 	
 	private String imageName;
