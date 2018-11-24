@@ -2,6 +2,10 @@ package com.vaja.game.model;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * this class is contain each obj
+ */
+
 public interface YSortable {
 
     public float getWorldX();

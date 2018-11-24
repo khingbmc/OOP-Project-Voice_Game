@@ -11,7 +11,6 @@ import com.vaja.game.model.world.World;
  */
 
 public class ChangeWorldEvent extends CutsceneEvent {
-
     private String newWorld;
     private int newX;
     private int newY;

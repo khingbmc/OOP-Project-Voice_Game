@@ -2,8 +2,10 @@ package com.vaja.game.model.actor;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
+import com.vaja.game.dialogue.Dialogue;
 import com.vaja.game.model.*;
 import com.vaja.game.model.world.World;
+import com.vaja.game.model.world.WorldObj;
 import com.vaja.util.AnimationSet;
 
 public class Actor implements YSortable {
@@ -122,33 +124,33 @@ public class Actor implements YSortable {
             return false;
         }
         // edge of world test
-        if (x+dir.getDX() >= world.getMap().getWidth() || x+dir.getDX() < 0 || y+dir.getDY() >= world.getMap().getHeight() || y+dir.getDY() < 0) {
+        if (x+dir.getDx() >= world.getMap().getWidth() || x+dir.getDx() < 0 || y+dir.getDy() >= world.getMap().getHeight() || y+dir.getDy() < 0) {
             reface(dir);
             return false;
         }
         // unwalkable tile test
-        if (!world.getMap().getTile(x+dir.getDX(), y+dir.getDY()).walkable()) {
+        if (!world.getMap().getTile(x+dir.getDx(), y+dir.getDy()).walkable()) {
             reface(dir);
             return false;
         }
         // actor test
-        if (world.getMap().getTile(x+dir.getDX(), y+dir.getDY()).getActor() != null) {
+        if (world.getMap().getTile(x+dir.getDx(), y+dir.getDy()).getActor() != null) {
             reface(dir);
             return false;
         }
         // object test
-        if (world.getMap().getTile(x+dir.getDX(), y+dir.getDY()).getObject() != null) {
-            WorldObject o = world.getMap().getTile(x+dir.getDX(), y+dir.getDY()).getObject();
+        if (world.getMap().getTile(x+dir.getDx(), y+dir.getDy()).getObject() != null) {
+            WorldObj o = world.getMap().getTile(x+dir.getDx(), y+dir.getDy()).getObject();
             if (!o.isWalkable()) {
                 reface(dir);
                 return false;
             }
         }
-        if (world.getMap().getTile(x+dir.getDX(), y+dir.getDY()).actorBeforeStep(this) == true) {
+        if (world.getMap().getTile(x+dir.getDx(), y+dir.getDy()).actorBeforeStep(this) == true) {
             initializeMove(dir);
             world.getMap().getTile(x, y).setActor(null);
-            x += dir.getDX();
-            y += dir.getDY();
+            x += dir.getDx();
+            y += dir.getDy();
             world.getMap().getTile(x, y).setActor(this);
             return true;
         }
@@ -168,23 +170,23 @@ public class Actor implements YSortable {
             return false;
         }
         // edge of world test
-        if (x+dir.getDX() >= world.getMap().getWidth() || x+dir.getDX() < 0 || y+dir.getDY() >= world.getMap().getHeight() || y+dir.getDY() < 0) {
+        if (x+dir.getDx() >= world.getMap().getWidth() || x+dir.getDx() < 0 || y+dir.getDy() >= world.getMap().getHeight() || y+dir.getDy() < 0) {
             reface(dir);
             return false;
         }
         // unwalkable tile test
-        if (!world.getMap().getTile(x+dir.getDX(), y+dir.getDY()).walkable()) {
+        if (!world.getMap().getTile(x+dir.getDx(), y+dir.getDy()).walkable()) {
             reface(dir);
             return false;
         }
         // actor test
-        if (world.getMap().getTile(x+dir.getDX(), y+dir.getDY()).getActor() != null) {
+        if (world.getMap().getTile(x+dir.getDx(), y+dir.getDy()).getActor() != null) {
             reface(dir);
             return false;
         }
         // object test
-        if (world.getMap().getTile(x+dir.getDX(), y+dir.getDY()).getObject() != null) {
-            WorldObject o = world.getMap().getTile(x+dir.getDX(), y+dir.getDY()).getObject();
+        if (world.getMap().getTile(x+dir.getDx(), y+dir.getDy()).getObject() != null) {
+            WorldObj o = world.getMap().getTile(x+dir.getDx(), y+dir.getDy()).getObject();
             if (!o.isWalkable()) {
                 reface(dir);
                 return false;
@@ -192,8 +194,8 @@ public class Actor implements YSortable {
         }
         initializeMove(dir);
         world.getMap().getTile(x, y).setActor(null);
-        x += dir.getDX();
-        y += dir.getDY();
+        x += dir.getDx();
+        y += dir.getDy();
         world.getMap().getTile(x, y).setActor(this);
         return true;
     }
@@ -202,8 +204,8 @@ public class Actor implements YSortable {
         this.facing = dir;
         this.srcX = x;
         this.srcY = y;
-        this.destX = x+dir.getDX();
-        this.destY = y+dir.getDY();
+        this.destX = x+dir.getDx();
+        this.destY = y+dir.getDy();
         this.worldX = x;
         this.worldY = y;
         animTimer = 0f;

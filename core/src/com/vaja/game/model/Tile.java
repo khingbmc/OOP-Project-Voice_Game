@@ -1,5 +1,6 @@
 package com.vaja.game.model;
 
+import com.vaja.Loader.LoadTerrain;
 import com.vaja.game.model.actor.Actor;
 import com.vaja.game.model.world.WorldObj;
 
@@ -7,21 +8,35 @@ public class Tile {
 
     private Actor actor;
 
-    private TERRAIN terrain;
+
 
     private WorldObj object;
 
-    public Tile(TERRAIN terrain){
+    private boolean walkable = true;
+    private LoadTerrain terrain;
+
+    public Tile(LoadTerrain terrain) {
         this.terrain = terrain;
     }
 
+    public void setTerrain(LoadTerrain terrain) {
+        this.terrain = terrain;
+    }
 
-    public TERRAIN getTerrain(){
+    public void setWalkable(boolean walkable) {
+        this.walkable = walkable;
+    }
+
+    public LoadTerrain getTerrain() {
         return terrain;
     }
 
     public Actor getActor() {
         return actor;
+    }
+
+    public void setActor(Actor actor) {
+        this.actor = actor;
     }
 
     public WorldObj getObject() {
@@ -32,7 +47,19 @@ public class Tile {
         this.object = object;
     }
 
-    public void setActor(Actor actor) {
-        this.actor = actor;
+    public boolean walkable() {
+        return walkable;
     }
+
+
+
+    public void actorStep(Actor a) {
+
+    }
+
+    public boolean actorBeforeStep(Actor a) {
+        return true;
+    }
+
+
 }

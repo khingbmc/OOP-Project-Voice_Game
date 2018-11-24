@@ -1,4 +1,4 @@
-oldale_town		22	24		0	0
+oldale_town		100	100		0	0
 fillTerrain				GRASS
 
 addObj	0	0	BIG_TREE

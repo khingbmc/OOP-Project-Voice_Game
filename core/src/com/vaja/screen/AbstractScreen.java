@@ -26,6 +26,8 @@ public abstract class AbstractScreen implements Screen {
     @Override
     public abstract void resume();
 
+    public abstract void update(float delta);
+
     @Override
     public abstract void hide();
 

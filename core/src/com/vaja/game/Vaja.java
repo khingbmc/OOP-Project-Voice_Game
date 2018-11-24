@@ -1,12 +1,33 @@
 package com.vaja.game;
 
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
+import com.vaja.Loader.*;
+import com.vaja.game.battle.animation.*;
+import com.vaja.game.battle.move.MoveDB;
+import com.vaja.game.model.world.World;
+import com.vaja.screen.AbstractScreen;
+import com.vaja.screen.BattleScreen;
 import com.vaja.screen.GameScreen;
+import com.vaja.screen.TransitionScreen;
+import com.vaja.screen.transition.Action;
+import com.vaja.screen.transition.BattleBlinkTransition;
+import com.vaja.screen.transition.BattleBlinkTransitionAccessor;
+import com.vaja.screen.transition.Transition;
+import com.vaja.util.SkinUIGenerate;
+
+import java.io.File;
 
 public class Vaja extends Game {
 
@@ -14,7 +35,7 @@ public class Vaja extends Game {
     private BattleScreen battleScreen;
     private TransitionScreen transitionScreen;
 
-    private MoveDatabase moveDatabase;
+    private MoveDB moveDatabase;
 
     private AssetManager assetManager;
 
@@ -33,8 +54,8 @@ public class Vaja extends Game {
          * LOAD VERSION
          */
         version = Gdx.files.internal("version.txt").readString();
-        System.out.println("Pokemon by Hydrozoa, version "+version);
-        Gdx.app.getGraphics().setTitle("Pokemon by Hydrozoa, version "+version);
+        System.out.println("VajaJava, version "+version);
+        Gdx.app.getGraphics().setTitle("VajaJava, version "+version);
 
         /*
          * LOADING SHADERS
@@ -66,12 +87,12 @@ public class Vaja extends Game {
          * LOADING ASSETS
          */
         assetManager = new AssetManager();
-        assetManager.setLoader(LWorldObjectDb.class, new LWorldObjectLoader(new InternalFileHandleResolver()));
-        assetManager.setLoader(LTerrainDb.class, new LTerrainLoader(new InternalFileHandleResolver()));
+        assetManager.setLoader(LoadWorldObjDB.class, new LoadWorldObjLoader(new InternalFileHandleResolver()));
+        assetManager.setLoader(LoadTerrainDB.class, new LoadTerrainLoader(new InternalFileHandleResolver()));
         assetManager.setLoader(World.class, new WorldLoader(new InternalFileHandleResolver()));
 
-        assetManager.load("res/LTerrain.xml", LTerrainDb.class);
-        assetManager.load("res/LWorldObjects.xml", LWorldObjectDb.class);
+        assetManager.load("res/LTerrain.xml", LoadTerrainDB.class);
+        assetManager.load("res/LWorldObjects.xml", LoadWorldObjDB.class);
 
         assetManager.load("res/graphics_packed/tiles/tilepack.atlas", TextureAtlas.class);
         assetManager.load("res/graphics_packed/ui/uipack.atlas", TextureAtlas.class);
@@ -100,9 +121,9 @@ public class Vaja extends Game {
 
         assetManager.finishLoading();
 
-        skin = SkinGenerator.generateSkin(assetManager);
+        skin = SkinUIGenerate.generateSkin(assetManager);
 
-        moveDatabase = new MoveDatabase();
+        moveDatabase = new MoveDB();
 
         gameScreen = new GameScreen(this);
         battleScreen = new BattleScreen(this);
@@ -159,7 +180,7 @@ public class Vaja extends Game {
         return transitionShader;
     }
 
-    public MoveDatabase getMoveDatabase() {
+    public MoveDB getMoveDatabase() {
         return moveDatabase;
     }
 

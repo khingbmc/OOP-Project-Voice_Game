@@ -1,153 +1,128 @@
 package com.vaja.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.GridPoint2;
+
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+
+
 import com.vaja.game.Vaja;
-import com.vaja.game.controller.PlayerController;
+import com.vaja.game.controller.ActorMovementControl;
+import com.vaja.game.controller.DialogueController;
+import com.vaja.game.controller.InteractionController;
+import com.vaja.game.dialogue.Dialogue;
 import com.vaja.game.model.*;
 import com.vaja.game.model.actor.Actor;
+import com.vaja.game.model.actor.PlayerActor;
 import com.vaja.game.model.world.World;
 import com.vaja.game.model.world.WorldObj;
+import com.vaja.game.model.world.cutscene.CutsceneEvent;
+import com.vaja.game.model.world.cutscene.CutscenePlayer;
+import com.vaja.game.ui.DialogueBox;
+import com.vaja.game.ui.OptionBox;
+import com.vaja.screen.render.EventQueueRenderer;
+import com.vaja.screen.render.TileInfoRenderer;
+import com.vaja.screen.render.WorldRenderer;
+import com.vaja.screen.transition.Action;
+import com.vaja.screen.transition.FadeInTransition;
+import com.vaja.screen.transition.FadeOutTransition;
 import com.vaja.util.AnimationSet;
 
-public class GameScreen extends AbstractScreen {
+import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Queue;
 
-    private PlayerController control;
+public class GameScreen extends AbstractScreen implements CutscenePlayer {
 
+    private InputMultiplexer multiplexer;
+    private DialogueController dialogueController;
+    private ActorMovementControl playerController;
+    private InteractionController interactionController;
+
+    private HashMap<String, World> worlds = new HashMap<String, World>();
     private World world;
-    private Actor player;
-    private Camera cam;
+    private PlayerActor player;
+    private Camera camera;
+    private Dialogue dialogue;
+
+    /* cutscenes */
+    private Queue<CutsceneEvent> eventQueue = new ArrayDeque<CutsceneEvent>();
+    private CutsceneEvent currentEvent;
 
     private SpriteBatch batch;
 
-    private WorldRender worldrenderer;
+    private Viewport gameViewport;
+
+    private WorldRenderer worldRenderer;
+    private EventQueueRenderer queueRenderer; // renders cutscenequeue
+    private TileInfoRenderer tileInfoRenderer;
+    private boolean renderTileInfo = false;
+
+    private int uiScale = 2;
+
+    private Stage uiStage;
+    private Table root;
+    private DialogueBox dialogueBox;
+    private OptionBox optionsBox;
 
     public GameScreen(Vaja app) {
         super(app);
+        gameViewport = new ScreenViewport();
         batch = new SpriteBatch();
 
-        TextureAtlas atlas = app.getAsset().get("res/graphics_unpacked/tiles_packed/textures.atlas");
+        TextureAtlas atlas = app.getAssetManager().get("res/graphics_packed/tiles/tilepack.atlas", TextureAtlas.class);
 
-        AnimationSet animationSet = new AnimationSet(
-                new Animation(0.3f/2, atlas.findRegions("brendan_walk_north"), Animation.PlayMode.LOOP_PINGPONG),
-                new Animation(0.3f/2, atlas.findRegions("brendan_walk_south"), Animation.PlayMode.LOOP_PINGPONG),
-                new Animation(0.3f/2, atlas.findRegions("brendan_walk_east"), Animation.PlayMode.LOOP_PINGPONG),
-                new Animation(0.3f/2, atlas.findRegions("brendan_walk_west"), Animation.PlayMode.LOOP_PINGPONG),
+        AnimationSet animations = new AnimationSet(
+                new Animation(0.3f/2f, atlas.findRegions("brendan_walk_north"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, atlas.findRegions("brendan_walk_south"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, atlas.findRegions("brendan_walk_east"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, atlas.findRegions("brendan_walk_west"), Animation.PlayMode.LOOP_PINGPONG),
                 atlas.findRegion("brendan_stand_north"),
                 atlas.findRegion("brendan_stand_south"),
                 atlas.findRegion("brendan_stand_east"),
                 atlas.findRegion("brendan_stand_west")
-        ); //0.3 sec to 2 tile
+        );
 
-        cam = new Camera();
-        world = new World(100, 100);
-        this.player = new Actor(world.getMap(), 50, 2, animationSet);
+        Array<World> loadedWorlds = app.getAssetManager().getAll(World.class, new Array<World>());
+        for (World w : loadedWorlds) {
+            worlds.put(w.getName(), w);
+        }
+        world = worlds.get("littleroot_town");
+
+        camera = new Camera();
+        player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
         world.addActor(player);
 
-        //addHouse(50, 15);
-        control = new PlayerController(player);
-        worldrenderer = new WorldRender(getApp().getAsset(), world);
+        initUI();
 
+        multiplexer = new InputMultiplexer();
 
-//        world = new World(100, 100);
-//        this.p_stand_south = new Texture("res/graphics_unpacked/tiles/brendan_stand_south.png");
-//        this.grass1 = new Texture("res/graphics_unpacked/tiles/grass1.png");
-//        this.grass2= new Texture("res/graphics_unpacked/tiles/grass2.png");
-//        map = new TileMap(30, 30);
-//        player = new Actor(world.getMap(), 50, 2, animationSet);
-//        world.addActor(player);
-//        batch = new SpriteBatch();
-//
-//        control = new PlayerController(player);
-//        cam = new Camera();
+        playerController = new ActorMovementControl(player);
+        dialogueController = new DialogueController(dialogueBox, optionsBox);
+        interactionController = new InteractionController(player, dialogueController);
+        multiplexer.addProcessor(0, dialogueController);
+        multiplexer.addProcessor(1, playerController);
+        multiplexer.addProcessor(2, interactionController);
 
-
-
-
-
-    }
-
-
-
-    @Override
-    public void show() {
-        Gdx.input.setInputProcessor(control);
+        worldRenderer = new WorldRenderer(getApp().getAssetManager(), world);
+        queueRenderer = new EventQueueRenderer(app.getSkin(), eventQueue);
+        tileInfoRenderer = new TileInfoRenderer(world, camera);
     }
 
     @Override
-    public void render(float v) {
-        control.update(v);
-
-        //plus 0.5 f because center of tile
-        //System.out.println(player.getX()+" "+player.getY());
-        float campositionX = player.getWorldX(), campositionY = player.getWorldY();
-
-        if(campositionX <= 9 || campositionX >= 90){
-            if(campositionX <= 9) {
-                campositionX = 9;
-            }
-            else{
-                campositionX = 90;
-            }
-            //camX range 9 for border
-
-
-        }
-
-        if(campositionY <= 6 || campositionY >= 93){
-            if(campositionY <= 6) {campositionY = 6;}
-            else{campositionY = 93;}
-
-        }
-        //camY range 6 for border
-        cam.update(campositionX+0.5f, campositionY+0.5f);
-        world.update(v);
-
-
-        batch.begin();
-
-        worldrenderer.render(batch, cam);
-        batch.end();
-
-
-    }
-
-    public void addHouse(int x, int y){
-        TextureAtlas atlas = getApp().getAsset().get("res/graphics_unpacked/tiles_packed/textures.atlas", TextureAtlas.class);
-        TextureRegion houseRegion = atlas.findRegion("small_house");
-        GridPoint2[] gridArray = new GridPoint2[5*4-1];
-        int index = 0;
-        for(int loopx = 0;loopx < 5;loopx++){
-            for(int loopY = 0;loopY < 4;loopY++){
-                if(loopx == 3 && loopY == 0){
-
-                    continue;
-                }
-                gridArray[index] = new GridPoint2(loopx, loopY);
-                index++;
-            }
-        }
-        WorldObj house = new WorldObj(x, y, false, houseRegion, 5f, 5f, gridArray);
-        world.addObject(house);
-
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
+    public void dispose() {
 
     }
 
@@ -157,7 +132,141 @@ public class GameScreen extends AbstractScreen {
     }
 
     @Override
-    public void dispose() {
+    public void pause() {
 
+    }
+
+    @Override
+    public void update(float delta) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F12)) {
+            renderTileInfo = !renderTileInfo;
+        }
+
+        while (currentEvent == null || currentEvent.isFinished()) { // no active event
+            if (eventQueue.peek() == null) { // no event queued up
+                currentEvent = null;
+                break;
+            } else {					// event queued up
+                currentEvent = eventQueue.poll();
+                currentEvent.begin(this);
+            }
+        }
+
+        if (currentEvent != null) {
+            currentEvent.update(delta);
+        }
+
+        if (currentEvent == null) {
+            playerController.update(delta);
+        }
+
+        dialogueController.update(delta);
+
+        if (!dialogueBox.isVisible()) {
+            camera.update(player.getWorldX()+0.5f, player.getWorldY()+0.5f);
+            world.update(delta);
+        }
+        uiStage.act(delta);
+    }
+
+    @Override
+    public void render(float delta) {
+        gameViewport.apply();
+        batch.begin();
+        worldRenderer.render(batch, camera);
+        queueRenderer.render(batch, currentEvent);
+        if (renderTileInfo) {
+            tileInfoRenderer.render(batch, Gdx.input.getX(), Gdx.input.getY());
+        }
+        batch.end();
+
+        uiStage.draw();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        batch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+        uiStage.getViewport().update(width/uiScale, height/uiScale, true);
+        gameViewport.update(width, height);
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void show() {
+        Gdx.input.setInputProcessor(multiplexer);
+        if (currentEvent != null) {
+            currentEvent.screenShow();
+        }
+    }
+
+    private void initUI() {
+        uiStage = new Stage(new ScreenViewport());
+        uiStage.getViewport().update(Gdx.graphics.getWidth()/uiScale, Gdx.graphics.getHeight()/uiScale, true);
+        //uiStage.setDebugAll(true);
+
+        root = new Table();
+        root.setFillParent(true);
+        uiStage.addActor(root);
+
+        dialogueBox = new DialogueBox(getApp().getSkin());
+        dialogueBox.setVisible(false);
+
+        optionsBox = new OptionBox(getApp().getSkin());
+        optionsBox.setVisible(false);
+
+        Table dialogTable = new Table();
+        dialogTable.add(optionsBox)
+                .expand()
+                .align(Align.right)
+                .space(8f)
+                .row();
+        dialogTable.add(dialogueBox)
+                .expand()
+                .align(Align.bottom)
+                .space(8f)
+                .row();
+
+
+        root.add(dialogTable).expand().align(Align.bottom);
+    }
+
+    public void changeWorld(World newWorld, int x, int y, DIRECTION face) {
+        player.changeWorld(newWorld, x, y);
+        this.world = newWorld;
+        player.refaceWithoutAnimation(face);
+        this.worldRenderer.setWorld(newWorld);
+        this.camera.update(player.getWorldX()+0.5f, player.getWorldY()+0.5f);
+    }
+
+
+
+    @Override
+    public void changeLocation(World newWorld, int x, int y, DIRECTION facing, Color color) {
+        getApp().startTransition(
+                this,
+                this,
+                new FadeOutTransition(0.8f, color, getApp().getTweenManager(), getApp().getAssetManager()),
+                new FadeInTransition(0.8f, color, getApp().getTweenManager(), getApp().getAssetManager()),
+                new Action() {
+                    @Override
+                    public void action() {
+                        changeWorld(newWorld, x, y, facing);
+                    }
+                });
+
+    }
+
+    @Override
+    public World getWorld(String worldName) {
+        return worlds.get(worldName);
+    }
+
+    @Override
+    public void queueEvent(CutsceneEvent event) {
+        eventQueue.add(event);
     }
 }

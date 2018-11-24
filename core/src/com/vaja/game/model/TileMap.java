@@ -15,8 +15,7 @@ public class TileMap {
         this.height = height;
 
         tile = new Tile[this.width][this.height];
-        for(int x = 0;x < this.width;x++){
-            for(int y = 0;y < this.height;y++){
+
 //                if(y >= 22 && y <=32){
 //                    if(x == 49 && y == 22) this.tile[x][y] = new Tile(TERRAIN.DIRTDOWN1);
 //                    else if(x == 50 && y == 22) this.tile[x][y] = new Tile(TERRAIN.DIRTDOWN2);
@@ -28,25 +27,21 @@ public class TileMap {
 //                    else if(x == 50 && y == 32) this.tile[x][y] = new Tile(TERRAIN.DIRTUP2);
 //                    else if(x == 51 && y == 32) this.tile[x][y] = new Tile(TERRAIN.DIRTUP3);
 //                }
-                if(Math.random() > 0.5d){
-                    this.tile[x][y] = new Tile(TERRAIN.GRASS1);
-                }
-                else{
-                    this.tile[x][y] = new Tile(TERRAIN.GRASS2);
-                }
-            }
-        }
     }
 
-    public Tile getTile(int x, int y){
+    public Tile getTile(int x, int y) {
         return tile[x][y];
     }
 
-    public int getWidth(){
-        return this.width;
+    public void setTile(Tile tile, int x, int y) {
+        this.tile[x][y] = tile;
     }
 
-    public int getHeight(){
-        return this.height;
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
