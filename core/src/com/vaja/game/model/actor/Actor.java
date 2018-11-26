@@ -25,7 +25,7 @@ public class Actor implements YSortable {
     private int srcX, srcY;
     private int destX, destY;
     private float animTimer;
-    private float WALK_TIME_PER_TILE = 0.3f;
+    private float WALK_TIME_PER_TILE = 0.2f;
     private float REFACE_TIME = 0.1f;
     private boolean noMoveNotifications = false;
 

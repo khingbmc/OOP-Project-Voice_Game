@@ -77,7 +77,7 @@ addFlowers		2	12
 addFlowers		3	13
 addFlowers		2	14
 addObj			4	14	SMALL_HOUSE
-teleport		7	14	GRASS	test_map_indoor		3	0	NORTH	WHITE
+teleport		7	14	GRASS	map_indoor		3	0	NORTH	WHITE
 addDoor			7	14
 addObj			9	14	SIGN
 
@@ -93,5 +93,3 @@ addFlowers		21	15
 addFlowers		21	13
 
 
-teleport		12	21	GRASS	oldale_town		9	0	NORTH	WHITE
-teleport		13	21	GRASS	oldale_town		9	0	NORTH	WHITE

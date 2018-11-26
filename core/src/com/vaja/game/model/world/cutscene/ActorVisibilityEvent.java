@@ -7,6 +7,11 @@ public class ActorVisibilityEvent extends CutsceneEvent {
     private Actor actor;
     private boolean invisible;
 
+    public ActorVisibilityEvent(Actor a, boolean invisible) {
+        this.actor = a;
+        this.invisible = invisible;
+    }
+
     @Override
     public void update(float delta) {
 
@@ -14,7 +19,7 @@ public class ActorVisibilityEvent extends CutsceneEvent {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 
     @Override
@@ -22,10 +27,7 @@ public class ActorVisibilityEvent extends CutsceneEvent {
 
     }
 
-    public ActorVisibilityEvent(Actor a, boolean invisible) {
-        this.actor = a;
-        this.invisible = invisible;
-    }
+
 
     @Override
     public void begin(CutscenePlayer player) {

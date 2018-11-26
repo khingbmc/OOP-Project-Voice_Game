@@ -95,8 +95,8 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
                 atlas.findRegion("brendan_stand_west")
         );
 
-        Array<World> loadedWorlds = app.getAssetManager().getAll(World.class, new Array<World>());
-        for (World w : loadedWorlds) {
+        Array<World> loadWorlds = app.getAssetManager().getAll(World.class, new Array<World>());
+        for (World w : loadWorlds) {
             worlds.put(w.getName(), w);
         }
         world = worlds.get("littleroot_town");
