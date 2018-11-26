@@ -10,14 +10,14 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class PokeballAnimation extends BattleAnimation {
+public class StartBattleAnimation extends BattleAnimation {
 
     /* Delay from start till the pokeball opens */
     private float pokeballOpen = 0.5f;
 
     private Texture whiteMask;
 
-    public PokeballAnimation() {
+    public StartBattleAnimation() {
         super(1.5f);
     }
 

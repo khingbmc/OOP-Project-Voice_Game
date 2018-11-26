@@ -25,7 +25,7 @@ public class Actor implements YSortable {
     private int srcX, srcY;
     private int destX, destY;
     private float animTimer;
-    private float WALK_TIME_PER_TILE = 0.2f;
+    private float WALK_TIME_PER_TILE = 0.1f;
     private float REFACE_TIME = 0.1f;
     private boolean noMoveNotifications = false;
 
@@ -58,6 +58,7 @@ public class Actor implements YSortable {
     }
 
     public void update(float delta) {
+
         if (state == ACTOR_STATE.WALKING) {
             animTimer += delta;
             walkTimer += delta;
@@ -117,6 +118,7 @@ public class Actor implements YSortable {
      * @return		If the move can be performed
      */
     public boolean move(DIRECTION dir) {
+        System.out.println(srcX+":"+srcY);
         if (state == ACTOR_STATE.WALKING) {
             if (facing == dir) {
                 moveRequestThisFrame = true;

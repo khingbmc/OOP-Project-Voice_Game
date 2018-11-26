@@ -1,7 +1,7 @@
 package com.vaja.game.battle;
 
 import com.vaja.game.battle.animation.FaintingAnimation;
-import com.vaja.game.battle.animation.PokeballAnimation;
+import com.vaja.game.battle.animation.StartBattleAnimation;
 import com.vaja.game.battle.event.*;
 import com.vaja.game.battle.move.Move;
 import com.vaja.game.model.Monster;
@@ -55,7 +55,7 @@ public class Battle implements BattleEventQueuer {
         queueEvent(new MonsterSpriteEvent(opponent.getSprite(), BATTLE_PARTY.OPPONENT));
         queueEvent(new TextEvent("Go "+player.getName()+"!", 1f));
         queueEvent(new MonsterSpriteEvent(player.getSprite(), BATTLE_PARTY.PLAYER));
-        queueEvent(new AnimationBattleEvent(BATTLE_PARTY.PLAYER, new PokeballAnimation()));
+        queueEvent(new AnimationBattleEvent(BATTLE_PARTY.PLAYER, new StartBattleAnimation()));
     }
 
 
@@ -99,7 +99,7 @@ public class Battle implements BattleEventQueuer {
         queueEvent(new MonsterSpriteEvent(monster.getSprite(), BATTLE_PARTY.PLAYER));
         queueEvent(new NameChangeEvent(monster.getName(), BATTLE_PARTY.PLAYER));
         queueEvent(new TextEvent("Go get 'em, "+monster.getName()+"!"));
-        queueEvent(new AnimationBattleEvent(BATTLE_PARTY.PLAYER, new PokeballAnimation()));
+        queueEvent(new AnimationBattleEvent(BATTLE_PARTY.PLAYER, new StartBattleAnimation()));
         this.state = STATE.READY_TO_PROGRESS;
     }
 

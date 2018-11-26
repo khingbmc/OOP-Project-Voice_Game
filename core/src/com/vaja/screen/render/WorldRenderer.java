@@ -41,6 +41,7 @@ public class WorldRenderer {
         float worldStartX = Gdx.graphics.getWidth()/2 - camera.getCameraX()* Setting.SCALE_TILE_S;
         float worldStartY = Gdx.graphics.getHeight()/2 - camera.getCameraY()* Setting.SCALE_TILE_S;
 
+
         /* render tile terrains */
         for (int x = 0; x < world.getMap().getWidth(); x++) {
             for (int y = 0; y < world.getMap().getHeight(); y++) {
@@ -92,7 +93,7 @@ public class WorldRenderer {
 
 
         for (YSortable loc : forRendering) {
-            System.out.println(loc.getSizeX());
+
             if (loc instanceof Actor) {
                 Actor a = (Actor)loc;
                 if (!a.isVisible()) {

@@ -1,0 +1,287 @@
+first_town		100	100				7 12
+
+fillTerrain				GRASS
+
+
+addTree			0   0
+addTree         0   2
+addTree         0   4
+addTree         0   6
+addTree         0   8
+addTree         0   10
+
+addTree         0   12
+addTree         0   14
+addTree         0   16
+addTree         0   18
+addTree         0   20
+
+addTree			0	22
+addTree         0   24
+addTree         0   26
+addTree         0   28
+addTree         0   30
+
+addTree         0   32
+addTree         0   34
+addTree         0   36
+addTree         0   38
+addTree         0   40
+
+addTree         0   42
+addTree         0   44
+addTree         0   46
+addTree         0   48
+addTree         0   50
+
+addTree         0   52
+addTree         0   54
+addTree         0   56
+addTree         0   58
+addTree         0   60
+
+addTree         0   62
+addTree         0   64
+addTree         0   66
+addTree         0   68
+addTree         0   70
+
+addTree         0   72
+addTree         0   74
+addTree         0   76
+addTree         0   78
+addTree         0   80
+
+addTree         0   82
+addTree         0   84
+addTree         0   86
+addTree         0   88
+addTree         0   90
+
+addTree         0   92
+addTree         0   94
+addTree         0   96
+addTree         0   98
+
+
+addTree         2   0
+addTree         4   0
+addTree         6   0
+addTree         8   0
+addTree         10  0
+
+addTree         12   0
+addTree         14   0
+addTree         16   0
+addTree         18   0
+addTree         20  0
+
+addTree         22   0
+addTree         24   0
+addTree         26   0
+addTree         28   0
+addTree         30  0
+
+addTree         32   0
+addTree         34   0
+addTree         36   0
+addTree         38   0
+addTree         40  0
+
+addTree         42   0
+addTree         44   0
+addTree         46   0
+addTree         48   0
+addTree         50  0
+
+addTree         52   0
+addTree         54   0
+addTree         56   0
+addTree         58   0
+addTree         60  0
+
+addTree         62   0
+addTree         64   0
+addTree         66   0
+addTree         68   0
+addTree         70  0
+
+addTree         72   0
+addTree         74   0
+addTree         76   0
+addTree         78   0
+addTree         80  0
+
+addTree         82   0
+addTree         84   0
+addTree         86   0
+addTree         88   0
+addTree         90  0
+
+addTree         92   0
+addTree         94   0
+addTree         96   0
+addTree         98   0
+
+
+addTree         98  2
+addTree         98  4
+addTree         98  6
+addTree         98  8
+addTree         98  10
+
+addTree         98  12
+addTree         98  14
+addTree         98  16
+addTree         98  18
+addTree         98  20
+
+addTree         98  22
+addTree         98  24
+addTree         98  26
+addTree         98  28
+addTree         98  30
+
+addTree         98  32
+addTree         98  34
+addTree         98  36
+addTree         98  38
+addTree         98  40
+
+addTree         98  42
+addTree         98  44
+addTree         98  46
+addTree         98  48
+addTree         98  50
+
+addTree         98  52
+addTree         98  54
+addTree         98  56
+addTree         98  58
+addTree         98  60
+
+addTree         98  62
+addTree         98  64
+addTree         98  66
+addTree         98  68
+addTree         98  70
+
+addTree         98  72
+addTree         98  74
+addTree         98  76
+addTree         98  78
+addTree         98  80
+
+addTree         98  82
+addTree         98  84
+addTree         98  86
+addTree         98  88
+addTree         98  90
+
+addTree         98  92
+addTree         98  94
+addTree         98  96
+addTree         98  98
+
+
+addTree         2   98
+addTree         4   98
+addTree         6   98
+addTree         8   98
+addTree         10  98
+
+addTree         12   98
+addTree         14   98
+addTree         16   98
+addTree         18   98
+addTree         20  98
+
+addTree         22   98
+addTree         24   98
+addTree         26   98
+addTree         28   98
+addTree         30  98
+
+addTree         32   98
+addTree         34   98
+addTree         36   98
+addTree         38   98
+addTree         40  98
+
+addTree         42   98
+addTree         44   98
+addTree         46   98
+addTree         48   98
+addTree         50  98
+
+addTree         52   98
+addTree         54   98
+addTree         56   98
+addTree         58   98
+addTree         60  98
+
+addTree         62   98
+addTree         64   98
+addTree         66   98
+addTree         68   98
+addTree         70  98
+
+addTree         72   98
+addTree         74   98
+addTree         76   98
+addTree         78   98
+addTree         80  98
+
+addTree         82   98
+addTree         84   98
+addTree         86   98
+addTree         88   98
+addTree         90  98
+
+addTree         92   98
+addTree         94   98
+addTree         96   98
+addTree         98   98
+
+
+
+setTerrain		7	13	GRASS_DIRTPATCH
+setTerrain		9	5	GRASS_DIRTPATCH
+setTerrain		16	13	GRASS_DIRTPATCH
+
+
+addObj			5	6	LABORATORY
+
+addObj			8	5	SIGN
+
+addFlowers		6	5
+addFlowers		6	4
+addFlowers		7	5
+addFlowers		7	4
+
+addFlowers		5	12
+addFlowers		2	12
+addFlowers		3	13
+addFlowers		2	14
+
+addObj			4	14	SMALL_HOUSE
+
+teleport		7	14	GRASS	map_indoor		3	0	NORTH	WHITE
+teleport        9   6   GRASS   map_indoor      3   0   NORTH   WHITE
+
+addDoor			9	6
+addDoor			7	14
+addObj			9	14	SIGN
+
+addObj			14	14	SIGN
+addObj			15	14	SMALL_HOUSE_MIRROR
+addDoor			16	14
+
+addObj			17	9	SIGN
+addFlowers		18	12
+addFlowers		20	12
+addFlowers		20	14
+addFlowers		21	15
+addFlowers		21	13
+
+

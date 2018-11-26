@@ -41,6 +41,14 @@ unwalkable		4	0
 unwalkable		5	0
 unwalkable		6	0
 
+unwalkable      0   5
+unwalkable      1   5
+unwalkable      2   5
+unwalkable      3   5
+unwalkable      4   5
+unwalkable      5   5
+unwalkable      6   5
+
 addRug			2	0
 
-teleport		3	0	NONE	littleroot_town	7	14	SOUTH	BLACK
+teleport		3	0	NONE	first_town	50	2	SOUTH	BLACK
