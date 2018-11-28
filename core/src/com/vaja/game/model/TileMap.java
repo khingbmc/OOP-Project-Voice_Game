@@ -1,6 +1,10 @@
 package com.vaja.game.model;
 
-
+/**
+ * this class is contain position point in map
+ * it look like grid
+ * @author khingbmc
+ */
 
 public class TileMap {
 

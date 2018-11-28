@@ -51,6 +51,8 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
     private ActorMovementControl playerController;
     private InteractionController interactionController;
 
+    private Vaja app;
+
     private HashMap<String, World> worlds = new HashMap<String, World>();
     private World world;
     private PlayerActor player;
@@ -116,7 +118,7 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
         multiplexer.addProcessor(1, playerController);
         multiplexer.addProcessor(2, interactionController);
 
-        worldRenderer = new WorldRenderer(getApp().getAssetManager(), world);
+        worldRenderer = new WorldRenderer(getApp().getAssetManager(), world, getApp());
         queueRenderer = new EventQueueRenderer(app.getSkin(), eventQueue);
         tileInfoRenderer = new TileInfoRenderer(world, camera);
     }
@@ -171,6 +173,7 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
 
     @Override
     public void render(float delta) {
+
         gameViewport.apply();
         batch.begin();
         worldRenderer.render(batch, camera);

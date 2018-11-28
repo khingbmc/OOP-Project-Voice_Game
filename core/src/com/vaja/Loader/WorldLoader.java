@@ -13,12 +13,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.GridPoint2;
 
 import com.badlogic.gdx.utils.Array;
+import com.vaja.game.battle.Battle;
 import com.vaja.game.model.DIRECTION;
 import com.vaja.game.model.TeleportTile;
 import com.vaja.game.model.Tile;
 import com.vaja.game.model.world.Door;
 import com.vaja.game.model.world.World;
 import com.vaja.game.model.world.WorldObj;
+import com.vaja.screen.BattleScreen;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,18 +35,22 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
     private Animation flowerAnimation;
     private Animation doorOpen;
     private Animation doorClose;
+    private Animation poringAnimation;
+
 
     public WorldLoader(FileHandleResolver resolver) {
         super(resolver);
     }
 
     @Override
-    public void loadAsync(AssetManager asman, String filename, FileHandle file, WorldParameter parameter) {
-        TextureAtlas atlas = asman.get("res/graphics_packed/tiles/tilepack.atlas", TextureAtlas.class);
+    public void loadAsync(AssetManager asset, String filename, FileHandle file, WorldParameter parameter) {
+        TextureAtlas atlas = asset.get("res/graphics_packed/tiles/tilepack.atlas", TextureAtlas.class);
+        TextureAtlas monAtlas = asset.get("res/graphics_packed/monster/monster_textures.atlas", TextureAtlas.class);
 
         flowerAnimation = new Animation(0.8f, atlas.findRegions("flowers"), Animation.PlayMode.LOOP_PINGPONG);
         doorOpen = new Animation(0.8f/4f, atlas.findRegions("woodenDoor"), Animation.PlayMode.NORMAL);
         doorClose = new Animation(0.5f/4f, atlas.findRegions("woodenDoor"), Animation.PlayMode.REVERSED);
+        poringAnimation = new Animation(0.8f, monAtlas.findRegions("poring"), Animation.PlayMode.LOOP_PINGPONG);
 
         BufferedReader reader = new BufferedReader(file.reader());
         int currentLine = 0;
@@ -56,41 +62,49 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
                 // header of file
                 if (currentLine == 1) {
                     String[] tokens = line.split("\\s+");
+
+                    //World(String name, int width, int height, int safeX, int safeY)
                     world = new World(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
                     continue;
                 }
 
                 if (line.isEmpty() || line.startsWith("//")) {
+                    //it a comment
                     continue;
                 }
 
                 // functions
-                String[] tokens = line.split("\\s+");
+                String[] tokens = line.split("\\s+");//space
                 switch (tokens[0]) {
                     case "fillTerrain":
-                        fillTerrain(asman, tokens[1]);
+                        fillTerrain(asset, tokens[1]);
                         break;
                     case "setTerrain":
-                        setTerrain(asman, tokens[1], tokens[2], tokens[3]);
+                        setTerrain(asset, tokens[1], tokens[2], tokens[3]);
                         break;
                     case "addFlowers":
                         addFlowers(tokens[1], tokens[2]);
                         break;
                     case "addRug":
-                        addRug(asman, tokens[1], tokens[2]);
+                        addRug(asset, tokens[1], tokens[2]);
                         break;
                     case "addObj":
-                        addGameWorldObject(asman, tokens[1], tokens[2], tokens[3]);
+                        addGameWorldObject(asset, tokens[1], tokens[2], tokens[3]);
                         break;
                     case "addTree":
-                        addGameWorldObject(asman, tokens[1], tokens[2], "BIG_TREE");
+                        addGameWorldObject(asset, tokens[1], tokens[2], "BIG_TREE");
                         break;
                     case "addDoor":
                         addDoor(tokens[1], tokens[2]);
                         break;
-                    case "teleport":
-                        teleport(asman, tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7], tokens[8]);
+                    case "addPoring":
+                        addPoring(tokens[1], tokens[2]);
                         break;
+                    case "teleport":
+                        teleport(asset, tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7], tokens[8]);
+                        break;
+
+
                     case "unwalkable":
                         unwalkable(tokens[1], tokens[2]);
                         break;
@@ -101,8 +115,8 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
         }
     }
 
-    private void fillTerrain(AssetManager asman, String terrain) {
-        LoadTerrainDB terrainDb = asman.get("res/LTerrain.xml", LoadTerrainDB.class);
+    private void fillTerrain(AssetManager asset, String terrain) {
+        LoadTerrainDB terrainDb = asset.get("res/LTerrain.xml", LoadTerrainDB.class);
         LoadTerrain t = terrainDb.getTerrain(terrain);
 
         for (int x = 0; x < world.getMap().getWidth(); x++) {
@@ -112,8 +126,8 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
         }
     }
 
-    private void setTerrain(AssetManager asman, String x, String y, String terrain) {
-        LoadTerrainDB terrainDb = asman.get("res/LTerrain.xml", LoadTerrainDB.class);
+    private void setTerrain(AssetManager asset, String x, String y, String terrain) {
+        LoadTerrainDB terrainDb = asset.get("res/LTerrain.xml", LoadTerrainDB.class);
         LoadTerrain t = terrainDb.getTerrain(terrain);
 
         int ix = Integer.parseInt(x);
@@ -130,6 +144,17 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
         WorldObj flowers = new WorldObj(x, y, true, flowerAnimation, 1f, 1f, gridArray);
         world.addObject(flowers);
     }
+
+    private void addPoring(String stringX, String stringY){
+        int x = Integer.parseInt(stringX);
+        int y = Integer.parseInt(stringY);
+
+        GridPoint2[] gridArray = new GridPoint2[1];
+        gridArray[0] = new GridPoint2(0, 0);
+        WorldObj poring = new WorldObj(x, y, true, this.poringAnimation, 3f, 3f, gridArray);
+        world.addObject(poring);
+    }
+
 
     private void addRug(AssetManager assetManager, String sx, String sy) {
         int x = Integer.parseInt(sx);

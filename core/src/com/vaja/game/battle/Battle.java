@@ -53,7 +53,7 @@ public class Battle implements BattleEventQueuer {
      */
     public void beginBattle() {
         queueEvent(new MonsterSpriteEvent(opponent.getSprite(), BATTLE_PARTY.OPPONENT));
-        queueEvent(new TextEvent("Go "+player.getName()+"!", 1f));
+        queueEvent(new TextEvent("ฉันคือ"+player.getName()+" สุดหล่อไงล่ะ!", 1f));
         queueEvent(new MonsterSpriteEvent(player.getSprite(), BATTLE_PARTY.PLAYER));
         queueEvent(new AnimationBattleEvent(BATTLE_PARTY.PLAYER, new StartBattleAnimation()));
     }

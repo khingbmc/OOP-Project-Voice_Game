@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.vaja.game.Setting;
+import com.vaja.game.Vaja;
 import com.vaja.game.model.Camera;
 import com.vaja.game.model.YSortable;
 import com.vaja.game.model.actor.Actor;
 import com.vaja.game.model.world.World;
 import com.vaja.game.model.world.WorldObj;
+import com.vaja.screen.BattleScreen;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,9 +32,12 @@ public class WorldRenderer {
     private List<Integer> renderedObjects = new ArrayList<Integer>();
     private List<YSortable> forRendering = new ArrayList<YSortable>();
 
-    public WorldRenderer(AssetManager assetManager, World world) {
+    private Vaja app;
+
+    public WorldRenderer(AssetManager assetManager, World world, Vaja app) {
         this.assetManager = assetManager;
-        this.world = world;;
+        this.world = world;
+        this.app = app;
 
         atlas = assetManager.get("res/graphics_packed/tiles/tilepack.atlas", TextureAtlas.class);
     }
@@ -46,6 +51,7 @@ public class WorldRenderer {
         for (int x = 0; x < world.getMap().getWidth(); x++) {
             for (int y = 0; y < world.getMap().getHeight(); y++) {
                 String imageName = world.getMap().getTile(x, y).getTerrain().getImageName();
+
                 TextureRegion render = null;
                 if (!imageName.isEmpty()) { // Terrain NONE has no image
                     render = atlas.findRegion(world.getMap().getTile(x, y).getTerrain().getImageName());
@@ -67,6 +73,15 @@ public class WorldRenderer {
                 if (world.getMap().getTile(x, y).getActor() != null) {
                     Actor actor = world.getMap().getTile(x, y).getActor();
                     forRendering.add(actor);
+//                    if(actor.getX() == 31){
+//
+//                        app.setScreen(app.getBattleScreen());
+//                        actor.setX(32);
+//                        app.setScreen(app.getGameScreen());
+//
+//                    }
+
+
                 }
                 if (world.getMap().getTile(x, y).getObject() != null) {
                     WorldObj object = world.getMap().getTile(x, y).getObject();

@@ -32,6 +32,7 @@ import java.io.File;
 public class Vaja extends Game {
 
     private GameScreen gameScreen;
+
     private BattleScreen battleScreen;
     private TransitionScreen transitionScreen;
 
@@ -99,6 +100,7 @@ public class Vaja extends Game {
         assetManager.load("res/graphics_packed/battle/battlepack.atlas", TextureAtlas.class);
         assetManager.load("res/graphics/pokemon/bulbasaur.png", Texture.class);
         assetManager.load("res/graphics/pokemon/slowpoke.png", Texture.class);
+        assetManager.load("res/graphics_packed/monster/monster_textures.atlas", TextureAtlas.class);
 
         for (int i = 0; i < 32; i++) {
             assetManager.load("res/graphics/statuseffect/attack_"+i+".png", Texture.class);
@@ -129,7 +131,7 @@ public class Vaja extends Game {
         battleScreen = new BattleScreen(this);
         transitionScreen = new TransitionScreen(this);
 
-        this.setScreen(gameScreen);
+        this.setScreen(battleScreen);
     }
 
     @Override

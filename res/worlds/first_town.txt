@@ -266,6 +266,8 @@ addFlowers		2	14
 
 addObj			4	14	SMALL_HOUSE
 
+addPoring       31  8
+
 teleport		7	14	GRASS	map_indoor		3	0	NORTH	WHITE
 teleport        9   6   GRASS   map_indoor      3   0   NORTH   WHITE
 

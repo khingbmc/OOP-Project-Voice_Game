@@ -12,7 +12,7 @@ public class LoadTerrainDB {
 
     public LoadTerrain getTerrain(String name ){
         if(!terrain.containsKey(name)){
-            throw new NullPointerException("Lterrain "+name+"is not found");
+            throw new NullPointerException("Loadterrain "+name+"is not found");
         }
         return terrain.get(name);
     }
