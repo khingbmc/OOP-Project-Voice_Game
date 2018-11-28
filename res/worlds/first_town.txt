@@ -1,4 +1,4 @@
-first_town      100 100           53  6
+first_town      100 100             5  51
 fillTerrain             GRASS
 
 
@@ -542,6 +542,7 @@ addTree     11  6
 addTree     11  7
 addTree     11  8
 addTree     11  9
+
 
 addTree     5  88
 addTree     5  89
@@ -5876,3 +5877,102 @@ addTree     92  7
 addTree     93  5
 addTree     93  6
 addTree     93  7
+
+addFlowers      95   2
+addFlowers      95   3
+addFlowers      95   4
+addFlowers      96   2
+addFlowers      96   3
+addFlowers      96   4
+addFlowers      97   2
+addFlowers      97   3
+addFlowers      97   4
+
+
+addFlowers      96   96
+addFlowers      96   97
+addFlowers      97   96
+addFlowers      97   97
+
+
+addFlowers      61  3
+addFlowers      61  4
+addFlowers      62  3
+addFlowers      62  4
+
+
+addFlowers      66  68
+addFlowers      66  69
+addFlowers      67  68
+addFlowers      67  69
+
+
+addFlowers      86  9
+addFlowers      86  10
+addFlowers      87  9
+addFlowers      87  10
+
+
+addFlowers      79  51
+addFlowers      79  52
+addFlowers      80  51
+addFlowers      80  52
+
+
+addFlowers      52  82
+addFlowers      52  83
+addFlowers      53  82
+addFlowers      53  83
+
+
+addFlowers      2  95
+addFlowers      2  96
+addFlowers      2  97
+addFlowers      3  95
+addFlowers      3  96
+addFlowers      3  97
+addFlowers      4  95
+addFlowers      4  96
+addFlowers      4  97
+
+
+addFlowers      52  45
+addFlowers      52  46
+addFlowers      53  45
+addFlowers      53  46
+
+
+addFlowers      35  50
+addFlowers      35  51
+addFlowers      34  50
+addFlowers      34  51
+
+
+addFlowers      13  30
+addFlowers      13  31
+addFlowers      14  30
+addFlowers      14  31
+
+
+
+addFlowers      2  3
+addFlowers      2  4
+addFlowers      2  2
+addFlowers      3  3
+addFlowers      3  4
+addFlowers      3  2
+addFlowers      4  3
+addFlowers      4  4
+addFlowers      4  2
+
+
+addFlowers      7  76
+addFlowers      7  77
+addFlowers      8  76
+addFlowers      8  77
+
+
+addFlowers      5  51
+addFlowers      5  52
+addFlowers      6  51
+addFlowers      6  52
