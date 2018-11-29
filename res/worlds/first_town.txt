@@ -1,4 +1,5 @@
-first_town      100 100             5  51
+first_town      100 100             98  98
+//37  13
 fillTerrain             GRASS
 
 
@@ -123,65 +124,100 @@ addTree         96   0
 addTree         98   0
 
 
-addTree         98  2
-addTree         98  4
-addTree         98  6
-addTree         98  8
-addTree         98  10
-
-addTree         98  12
-addTree         98  14
-addTree         98  16
-addTree         98  18
-addTree         98  20
-
-addTree         98  22
-addTree         98  24
-addTree         98  26
-addTree         98  28
-addTree         98  30
-
-addTree         98  32
-addTree         98  34
-addTree         98  36
-addTree         98  38
-addTree         98  40
-
-addTree         98  42
-addTree         98  44
-addTree         98  46
-addTree         98  48
-addTree         98  50
-
-addTree         98  52
-addTree         98  54
-addTree         98  56
-addTree         98  58
-addTree         98  60
-
-addTree         98  62
-addTree         98  64
-addTree         98  66
-addTree         98  68
-addTree         98  70
-
-addTree         98  72
-addTree         98  74
-addTree         98  76
-addTree         98  78
-addTree         98  80
-
-addTree         98  82
-addTree         98  84
-addTree         98  86
-addTree         98  88
-addTree         98  90
-
-addTree         98  92
-addTree         98  94
-addTree         98  96
-addTree         98  98
-
+addTree     95  5
+addTree     95  6
+addTree     95  7
+addTree     95  8
+addTree     95  9
+addTree     95  10
+addTree     95  11
+addTree     95  12
+addTree     95  13
+addTree     95  14
+addTree     95  15
+addTree     95  16
+addTree     95  17
+addTree     95  18
+addTree     95  19
+addTree     95  20
+addTree     95  21
+addTree     95  22
+addTree     95  23
+addTree     95  24
+addTree     95  25
+addTree     95  26
+addTree     95  27
+addTree     95  28
+addTree     95  29
+addTree     95  30
+addTree     95  31
+addTree     95  32
+addTree     95  33
+addTree     95  34
+addTree     95  35
+addTree     95  36
+addTree     95  37
+addTree     95  38
+addTree     95  39
+addTree     95  40
+addTree     95  41
+addTree     95  42
+addTree     95  43
+addTree     95  44
+addTree     95  45
+addTree     95  46
+addTree     95  47
+addTree     95  48
+addTree     95  49
+addTree     95  50
+addTree     95  51
+addTree     95  52
+addTree     95  53
+addTree     95  54
+addTree     95  55
+addTree     95  56
+addTree     95  57
+addTree     95  58
+addTree     95  59
+addTree     95  60
+addTree     95  61
+addTree     95  62
+addTree     95  63
+addTree     95  64
+addTree     95  65
+addTree     95  66
+addTree     95  67
+addTree     95  68
+addTree     95  69
+addTree     95  70
+addTree     95  71
+addTree     95  72
+addTree     95  73
+addTree     95  74
+addTree     95  75
+addTree     95  76
+addTree     95  77
+addTree     95  78
+addTree     95  79
+addTree     95  80
+addTree     95  81
+addTree     95  82
+addTree     95  83
+addTree     95  84
+addTree     95  85
+addTree     95  86
+addTree     95  87
+addTree     95  88
+addTree     95  89
+addTree     95  90
+addTree     95  91
+addTree     95  92
+addTree     95  93
+addTree     95  94
+addTree     95  95
+addTree     95  96
+addTree     95  97
+addTree     95  98
 
 addTree         2   98
 addTree         4   98
@@ -239,8 +275,6 @@ addTree         90  98
 
 addTree         92   98
 addTree         94   98
-addTree         96   98
-addTree         98   98
 
 
 
@@ -5878,22 +5912,11 @@ addTree     93  5
 addTree     93  6
 addTree     93  7
 
-addFlowers      95   2
-addFlowers      95   3
-addFlowers      95   4
-addFlowers      96   2
-addFlowers      96   3
-addFlowers      96   4
-addFlowers      97   2
-addFlowers      97   3
-addFlowers      97   4
 
 
-addFlowers      96   96
-addFlowers      96   97
-addFlowers      97   96
-addFlowers      97   97
 
+
+// MONSTER
 
 addFlowers      61  3
 addFlowers      61  4
@@ -5925,17 +5948,6 @@ addFlowers      53  82
 addFlowers      53  83
 
 
-addFlowers      2  95
-addFlowers      2  96
-addFlowers      2  97
-addFlowers      3  95
-addFlowers      3  96
-addFlowers      3  97
-addFlowers      4  95
-addFlowers      4  96
-addFlowers      4  97
-
-
 addFlowers      52  45
 addFlowers      52  46
 addFlowers      53  45
@@ -5954,18 +5966,6 @@ addFlowers      14  30
 addFlowers      14  31
 
 
-
-addFlowers      2  3
-addFlowers      2  4
-addFlowers      2  2
-addFlowers      3  3
-addFlowers      3  4
-addFlowers      3  2
-addFlowers      4  3
-addFlowers      4  4
-addFlowers      4  2
-
-
 addFlowers      7  76
 addFlowers      7  77
 addFlowers      8  76
@@ -5976,3 +5976,464 @@ addFlowers      5  51
 addFlowers      5  52
 addFlowers      6  51
 addFlowers      6  52
+
+
+
+// LINE BOSS
+
+addFlowers     97  6
+addFlowers     97  7
+addFlowers     97  8
+addFlowers     97  9
+addFlowers     97  10
+addFlowers     97  11
+addFlowers     97  12
+addFlowers     97  13
+addFlowers     97  14
+addFlowers     97  15
+addFlowers     97  16
+addFlowers     97  17
+addFlowers     97  18
+addFlowers     97  19
+addFlowers     97  20
+addFlowers     97  21
+addFlowers     97  22
+addFlowers     97  23
+addFlowers     97  24
+addFlowers     97  25
+addFlowers     97  26
+addFlowers     97  27
+addFlowers     97  28
+addFlowers     97  29
+addFlowers     97  30
+addFlowers     97  31
+addFlowers     97  32
+addFlowers     97  33
+addFlowers     97  34
+addFlowers     97  35
+addFlowers     97  36
+addFlowers     97  37
+addFlowers     97  38
+addFlowers     97  39
+addFlowers     97  40
+addFlowers     97  41
+addFlowers     97  42
+addFlowers     97  43
+addFlowers     97  44
+addFlowers     97  45
+addFlowers     97  46
+addFlowers     97  47
+addFlowers     97  48
+addFlowers     97  49
+addFlowers     97  50
+addFlowers     97  51
+addFlowers     97  52
+addFlowers     97  53
+addFlowers     97  54
+addFlowers     97  55
+addFlowers     97  56
+addFlowers     97  57
+addFlowers     97  58
+addFlowers     97  59
+addFlowers     97  60
+addFlowers     97  61
+addFlowers     97  62
+addFlowers     97  63
+addFlowers     97  64
+addFlowers     97  65
+addFlowers     97  66
+addFlowers     97  67
+addFlowers     97  68
+addFlowers     97  69
+addFlowers     97  70
+addFlowers     97  71
+addFlowers     97  72
+addFlowers     97  73
+addFlowers     97  74
+addFlowers     97  75
+addFlowers     97  76
+addFlowers     97  77
+addFlowers     97  78
+addFlowers     97  79
+addFlowers     97  80
+addFlowers     97  81
+addFlowers     97  82
+addFlowers     97  83
+addFlowers     97  84
+addFlowers     97  85
+addFlowers     97  86
+addFlowers     97  87
+addFlowers     97  88
+addFlowers     97  89
+addFlowers     97  90
+addFlowers     97  91
+addFlowers     97  92
+addFlowers     97  93
+addFlowers     97  94
+addFlowers     97  95
+
+
+addFlowers     99  6
+addFlowers     99  7
+addFlowers     99  8
+addFlowers     99  9
+addFlowers     99  10
+addFlowers     99  11
+addFlowers     99  12
+addFlowers     99  13
+addFlowers     99  14
+addFlowers     99  15
+addFlowers     99  16
+addFlowers     99  17
+addFlowers     99  18
+addFlowers     99  19
+addFlowers     99  20
+addFlowers     99  21
+addFlowers     99  22
+addFlowers     99  23
+addFlowers     99  24
+addFlowers     99  25
+addFlowers     99  26
+addFlowers     99  27
+addFlowers     99  28
+addFlowers     99  29
+addFlowers     99  30
+addFlowers     99  31
+addFlowers     99  32
+addFlowers     99  33
+addFlowers     99  34
+addFlowers     99  35
+addFlowers     99  36
+addFlowers     99  37
+addFlowers     99  38
+addFlowers     99  39
+addFlowers     99  40
+addFlowers     99  41
+addFlowers     99  42
+addFlowers     99  43
+addFlowers     99  44
+addFlowers     99  45
+addFlowers     99  46
+addFlowers     99  47
+addFlowers     99  48
+addFlowers     99  49
+addFlowers     99  50
+addFlowers     99  51
+addFlowers     99  52
+addFlowers     99  53
+addFlowers     99  54
+addFlowers     99  55
+addFlowers     99  56
+addFlowers     99  57
+addFlowers     99  58
+addFlowers     99  59
+addFlowers     99  60
+addFlowers     99  61
+addFlowers     99  62
+addFlowers     99  63
+addFlowers     99  64
+addFlowers     99  65
+addFlowers     99  66
+addFlowers     99  67
+addFlowers     99  68
+addFlowers     99  69
+addFlowers     99  70
+addFlowers     99  71
+addFlowers     99  72
+addFlowers     99  73
+addFlowers     99  74
+addFlowers     99  75
+addFlowers     99  76
+addFlowers     99  77
+addFlowers     99  78
+addFlowers     99  79
+addFlowers     99  80
+addFlowers     99  81
+addFlowers     99  82
+addFlowers     99  83
+addFlowers     99  84
+addFlowers     99  85
+addFlowers     99  86
+addFlowers     99  87
+addFlowers     99  88
+addFlowers     99  89
+addFlowers     99  90
+addFlowers     99  91
+addFlowers     99  92
+addFlowers     99  93
+addFlowers     99  94
+addFlowers     99  95
+
+
+
+//MINIBOSS 3
+//addFlowers      95   2
+//addFlowers      95   3
+//addFlowers      95   4
+//addFlowers      96   2
+addFlowers      96   3
+//addFlowers      96   4
+//addFlowers      97   2
+//addFlowers      97   3
+//addFlowers      97   4
+
+//MINIBOSS 2
+//addFlowers      2  95
+//addFlowers      2  96
+//addFlowers      2  97
+//addFlowers      3  95
+addFlowers      3  96
+//addFlowers      3  97
+//addFlowers      4  95
+//addFlowers      4  96
+//addFlowers      4  97
+
+//MINIBOSS 1
+//addFlowers      2  3
+//addFlowers      2  4
+//addFlowers      2  2
+addFlowers      3  3
+//addFlowers      3  4
+//addFlowers      3  2
+//addFlowers      4  3
+//addFlowers      4  4
+//addFlowers      4  2
+
+//Boss MAP
+addFlowers      98  97
+
+
+
+//VILLAGE
+
+
+
+//SMALL_HOUSE
+addFlowers      19   18
+addFlowers      19   19
+addFlowers      20   18
+addObj          20   19  SMALL_HOUSE
+teleport        23   19  GRASS   map_indoor      3  0   NORTH   WHITE
+addDoor         23   19
+
+
+//SMALL_HOUSE
+addFlowers      40   18
+addFlowers      40   19
+addFlowers      39   18
+addObj          35   19  SMALL_HOUSE
+teleport        38   19  GRASS   map_indoor      3  0   NORTH   WHITE
+addDoor         38   19
+
+//Lab
+addObj          23   9   LABORATORY
+addDoor         27   9
+addFlowers      23  7
+addFlowers      23  8
+
+
+//Lab
+addObj          40   28   LABORATORY
+addDoor         44   28
+addFlowers     38  28
+addFlowers     38  29
+addFlowers     38  30
+
+
+addFlowers     39  28
+addFlowers     39  29
+addFlowers     39  30
+
+addFlowers     47  28
+addFlowers     47  29
+addFlowers     47  30
+
+
+addFlowers     48  28
+addFlowers     48  29
+addFlowers     48  30
+
+
+addFlowers     38  26
+addFlowers     38  27
+
+
+addFlowers     39  26
+addFlowers     39  27
+
+
+addFlowers     40  26
+addFlowers     40  27
+
+
+addFlowers     41  26
+addFlowers     41  27
+
+
+addFlowers     42  26
+addFlowers     42  27
+
+
+addFlowers     43  26
+addFlowers     43  27
+
+
+addFlowers     44  26
+addFlowers     44  27
+
+
+addFlowers     45  26
+addFlowers     45  27
+
+
+addFlowers     46  26
+addFlowers     46  27
+
+
+addFlowers     47  26
+addFlowers     47  27
+
+
+addFlowers     48  26
+addFlowers     48  27
+
+
+addFlowers     24  7
+addFlowers     24  8
+
+
+addFlowers     25  7
+addFlowers     25  8
+
+//Sign
+addObj          30   8   SIGN
+
+
+//SMALL_HOUSE_MIRROR
+addObj          50  14  SMALL_HOUSE_MIRROR
+teleport        51   14  GRASS   map_indoor      3  0   NORTH   WHITE
+addDoor         51   14
+
+
+addFlowers     55  14
+addFlowers     55  15
+addFlowers     55  16
+
+
+addFlowers     56  14
+addFlowers     56  15
+addFlowers     56  16
+
+
+addFlowers     57  14
+addFlowers     57  15
+addFlowers     57  16
+
+
+setTerrain      53  12  GRASS_DIRTPATCH
+addFlowers     53  13
+
+
+addFlowers     54  12
+setTerrain      54  13  GRASS_DIRTPATCH
+
+
+setTerrain      55  12  GRASS_DIRTPATCH
+addFlowers     55  13
+
+
+addFlowers     56  12
+setTerrain      56  13  GRASS_DIRTPATCH
+
+
+setTerrain      57  12  GRASS_DIRTPATCH
+addFlowers     57  13
+
+
+
+
+
+addFlowers     16  2
+addFlowers     16  4
+addFlowers     18  2
+addFlowers     18  4
+addFlowers     20  2
+addFlowers     20  4
+addFlowers     22  2
+addFlowers     22  4
+addFlowers     24  2
+addFlowers     24  4
+addFlowers     26  2
+addFlowers     26  4
+addFlowers     28  2
+addFlowers     28  4
+addFlowers     30  2
+addFlowers     30  4
+addFlowers     32  2
+addFlowers     32  4
+addFlowers     34  2
+addFlowers     34  4
+addFlowers     36  2
+addFlowers     36  4
+addFlowers     38  2
+addFlowers     38  4
+addFlowers     40  2
+addFlowers     40  4
+addFlowers     42  2
+addFlowers     42  4
+addFlowers     44  2
+addFlowers     44  4
+addFlowers     46  2
+addFlowers     46  4
+addFlowers     48  2
+addFlowers     48  4
+addFlowers     50  2
+addFlowers     50  4
+addFlowers     52  2
+addFlowers     52  4
+addFlowers     54  2
+addFlowers     54  4
+addFlowers     56  2
+addFlowers     56  4
+addFlowers     17  3
+addFlowers     17  5
+addFlowers     19  3
+addFlowers     19  5
+addFlowers     21  3
+addFlowers     21  5
+addFlowers     23  3
+addFlowers     23  5
+addFlowers     25  3
+addFlowers     25  5
+addFlowers     27  3
+addFlowers     27  5
+addFlowers     29  3
+addFlowers     29  5
+addFlowers     31  3
+addFlowers     31  5
+addFlowers     33  3
+addFlowers     33  5
+addFlowers     35  3
+addFlowers     35  5
+addFlowers     37  3
+addFlowers     37  5
+addFlowers     39  3
+addFlowers     39  5
+addFlowers     41  3
+addFlowers     41  5
+addFlowers     43  3
+addFlowers     43  5
+addFlowers     45  3
+addFlowers     45  5
+addFlowers     47  3
+addFlowers     47  5
+addFlowers     49  3
+addFlowers     49  5
+addFlowers     51  3
+addFlowers     51  5
+addFlowers     53  3
+addFlowers     53  5
+addFlowers     55  3
+addFlowers     55  5
+addFlowers     57  3
+addFlowers     57  5
