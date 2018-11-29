@@ -86,8 +86,10 @@ public class World implements ActorObserver {
         }
     }
 
+
     public TileMap getMap() {
         return map;
+
     }
 
     public List<Actor> getActors() {

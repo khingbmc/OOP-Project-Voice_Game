@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.vaja.Loader.WorldLoader;
 import com.vaja.game.Setting;
 import com.vaja.game.Vaja;
 import com.vaja.game.battle.BATTLE_PARTY;
@@ -21,6 +22,8 @@ import com.vaja.game.battle.event.BattleEvent;
 import com.vaja.game.battle.event.BattleEventPlayer;
 import com.vaja.game.controller.BattleScreenController;
 import com.vaja.game.model.Monster;
+import com.vaja.game.model.actor.Actor;
+import com.vaja.game.model.actor.PlayerActor;
 import com.vaja.game.ui.*;
 import com.vaja.screen.render.BattleDebugRenderer;
 import com.vaja.screen.render.BattleRenderer;
@@ -42,6 +45,8 @@ public class BattleScreen extends AbstractScreen implements BattleEventPlayer {
 
     private BATTLE_PARTY animationPrimary;
     private BattleAnimation battleAnimation = null;
+
+    private Actor monsterP = null;
 
     /* View */
     private BitmapFont text = new BitmapFont();
@@ -70,20 +75,36 @@ public class BattleScreen extends AbstractScreen implements BattleEventPlayer {
     private boolean uiDebug = false;
     private boolean battleDebug = true;
 
-    public BattleScreen(Vaja app) {
+    private Texture monster;
+    private PlayerActor user;
+
+    public BattleScreen(Vaja app, Actor monsterP, PlayerActor user) {
+
         super(app);
+        this.monsterP = monsterP;
+        this.user = user;
         gameViewport = new ScreenViewport();
         batch = new SpriteBatch();
 
-        Texture bulbasaur = app.getAssetManager().get("res/graphics/pokemon/bulbasaur.png", Texture.class);
-        Texture slowpoke = app.getAssetManager().get("res/graphics/pokemon/slowpoke.png", Texture.class);
+        Texture player = app.getAssetManager().get("res/graphics_unpacked/tiles/brendan_stand_west.png", Texture.class);
 
-        Trainer playerTrainer = new Trainer(Monster.generatePokemon("Bulba", bulbasaur, app.getMoveDatabase()));
-        playerTrainer.addPokemon(Monster.generatePokemon("Golem", slowpoke, app.getMoveDatabase()));
+
+        if(monsterP.getName().equals("Poring")){
+            this.monster = app.getAssetManager().get("res/graphics_unpacked/monster/poring_stand.png", Texture.class);
+
+        }
+
+
+
+
+
+        Trainer playerTrainer = new Trainer(Monster.generatePokemon("Brian", player, app.getMoveDatabase(), user.getLevel()+10));
+
+
 
         battle = new Battle(
                 playerTrainer,
-                Monster.generatePokemon("Grimer", slowpoke, app.getMoveDatabase()));
+                Monster.generatePokemon(monsterP.getName(), this.monster, app.getMoveDatabase(), monsterP.getLevel()+10));
         battle.setEventPlayer(this);
 
         animationPrimary = BATTLE_PARTY.PLAYER;
@@ -97,6 +118,14 @@ public class BattleScreen extends AbstractScreen implements BattleEventPlayer {
         controller = new BattleScreenController(battle, queue, dialogueBox, moveSelectBox, optionBox);
 
         battle.beginBattle();
+    }
+
+    public Actor getMonster() {
+        return monsterP;
+    }
+
+    public void setMonster(Actor monster) {
+        this.monsterP = monster;
     }
 
     @Override
@@ -136,11 +165,21 @@ public class BattleScreen extends AbstractScreen implements BattleEventPlayer {
                 } else if (battle.getState() == Battle.STATE.READY_TO_PROGRESS) {
                     controller.restartTurn();
                 } else if (battle.getState() == Battle.STATE.WIN) {
+                    this.monsterP.setVisible(false);
+
+                    monsterP.getWorld().removeActor(monsterP);
+                    battle.setState(Battle.STATE.READY_TO_PROGRESS);
                     getApp().setScreen(getApp().getGameScreen());
                 } else if (battle.getState() == Battle.STATE.LOSE) {
+                    this.monsterP.setVisible(false);
+
+                    monsterP.getWorld().removeActor(monsterP);
+                    battle.setState(Battle.STATE.READY_TO_PROGRESS);
                     getApp().setScreen(getApp().getGameScreen());
                 } else if (battle.getState() == Battle.STATE.RAN) {
+                    battle.setState(Battle.STATE.READY_TO_PROGRESS);
                     getApp().setScreen(getApp().getGameScreen());
+
                 }
                 break;
             } else {					// event queued up

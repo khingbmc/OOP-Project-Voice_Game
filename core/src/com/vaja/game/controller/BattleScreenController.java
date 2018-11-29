@@ -57,7 +57,7 @@ public class BattleScreenController extends InputAdapter {
                      */
                     for (int i = 0; i < battle.getPlayerTrainer().getTeamSize(); i++) {
                         if (!battle.getPlayerTrainer().getPokemon(i).isFainted()) {
-                            battle.chooseNewPokemon(battle.getPlayerTrainer().getPokemon(i));
+                            battle.chooseMons(battle.getPlayerTrainer().getPokemon(i));
                             optionBox.setVisible(false);
                             this.state = STATE.DEACTIVATED;
                             break;

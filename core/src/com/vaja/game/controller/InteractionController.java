@@ -23,17 +23,22 @@ public class InteractionController extends InputAdapter {
 
     @Override
     public boolean keyUp(int keycode) {
-        if (keycode == Input.Keys.X) {
+        if (keycode == Input.Keys.SPACE) {
+
             Tile target = a.getWorld().getMap().getTile(a.getX()+a.getFacing().getDx(), a.getY()+a.getFacing().getDy());
             if (target.getActor() != null) {
                 Actor targetActor = target.getActor();
                 if (targetActor.getDialogue() != null) {
+
                     if (targetActor.refaceWithoutAnimation(DIRECTION.getOpposite(a.getFacing()))){
                         Dialogue dialogue = targetActor.getDialogue();
                         dialogueController.startDialogue(dialogue);
+
+
                     }
                 }
             }
+
             return false;
         }
         return false;

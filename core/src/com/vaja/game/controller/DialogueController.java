@@ -40,7 +40,7 @@ public class DialogueController extends InputAdapter {
         if (dialogueBox.isVisible() && !dialogueBox.isFinished()) {
             return false;
         }
-        if (traverser != null && keycode == Input.Keys.X) { // continue through tree
+        if (traverser != null && keycode == Input.Keys.SPACE) { // continue through tree
             DialogueNode thisNode = traverser.getNode();
 
             if (thisNode instanceof LinearDialogueNode)  {

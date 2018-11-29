@@ -14,10 +14,7 @@ import com.vaja.game.model.Monster;
 public class Battle implements BattleEventQueuer {
 
 
-    @Override
-    public void queueEvent(BattleEvent event) {
-        this.eventPlayer.queueEvent(event);
-    }
+
 
     public enum STATE {
         READY_TO_PROGRESS,
@@ -26,6 +23,11 @@ public class Battle implements BattleEventQueuer {
         WIN,
         LOSE,
         ;
+    }
+
+    @Override
+    public void queueEvent(BattleEvent event) {
+        this.eventPlayer.queueEvent(event);
     }
 
     private STATE state;
@@ -53,11 +55,14 @@ public class Battle implements BattleEventQueuer {
      */
     public void beginBattle() {
         queueEvent(new MonsterSpriteEvent(opponent.getSprite(), BATTLE_PARTY.OPPONENT));
-        queueEvent(new TextEvent("ฉันคือ"+player.getName()+" สุดหล่อไงล่ะ!", 1f));
+        queueEvent(new TextEvent("I'm"+player.getName()+" Dovakhins!", 1f));
         queueEvent(new MonsterSpriteEvent(player.getSprite(), BATTLE_PARTY.PLAYER));
         queueEvent(new AnimationBattleEvent(BATTLE_PARTY.PLAYER, new StartBattleAnimation()));
     }
 
+    public void setState(STATE state) {
+        this.state = state;
+    }
 
     /**
      * Progress the battle one turn.
@@ -88,7 +93,7 @@ public class Battle implements BattleEventQueuer {
      * This will NOT take up a turn.
      * @param monster	Pokemon the trainer is sending in
      */
-    public void chooseNewPokemon(Monster monster) {
+    public void chooseMons(Monster monster) {
         this.player = monster;
         queueEvent(new HPAnimationEvent(
                 BATTLE_PARTY.PLAYER,
@@ -98,7 +103,7 @@ public class Battle implements BattleEventQueuer {
                 0f));
         queueEvent(new MonsterSpriteEvent(monster.getSprite(), BATTLE_PARTY.PLAYER));
         queueEvent(new NameChangeEvent(monster.getName(), BATTLE_PARTY.PLAYER));
-        queueEvent(new TextEvent("Go get 'em, "+monster.getName()+"!"));
+        queueEvent(new TextEvent("ชื่อของฉันคือ "+monster.getName()+" สุดเท่ไงล่ะ!"));
         queueEvent(new AnimationBattleEvent(BATTLE_PARTY.PLAYER, new StartBattleAnimation()));
         this.state = STATE.READY_TO_PROGRESS;
     }
@@ -114,26 +119,26 @@ public class Battle implements BattleEventQueuer {
     private void playTurn(BATTLE_PARTY user, int input) {
         BATTLE_PARTY target = BATTLE_PARTY.getOpposite(user);
 
-        Monster pokeUser = null;
-        Monster pokeTarget = null;
+        Monster battleUser = null;
+        Monster monsTarget = null;
         if (user == BATTLE_PARTY.PLAYER) {
-            pokeUser = player;
-            pokeTarget = opponent;
+            battleUser = player;
+            monsTarget = opponent;
         } else if (user == BATTLE_PARTY.OPPONENT) {
-            pokeUser = opponent;
-            pokeTarget = player;
+            battleUser = opponent;
+            monsTarget = player;
         }
 
-        Move move = pokeUser.getMove(input);
+        Move move = battleUser.getMove(input);
 
         /* Broadcast the text graphics */
-        queueEvent(new TextEvent(pokeUser.getName()+" used\n"+move.getName().toUpperCase()+"!", 0.5f));
+        queueEvent(new TextEvent(battleUser.getName()+" used\n"+move.getName().toUpperCase()+"!", 0.5f));
 
-        if (mechanics.attemptHit(move, pokeUser, pokeTarget)) {
-            move.useMove(mechanics, pokeUser, pokeTarget, user, this);
+        if (mechanics.attemptHit(move, battleUser, monsTarget)) {
+            move.useMove(mechanics, battleUser, monsTarget, user, this);
         } else { // miss
             /* Broadcast the text graphics */
-            queueEvent(new TextEvent(pokeUser.getName()+"'s\nattack missed!", 0.5f));
+            queueEvent(new TextEvent(battleUser.getName()+"'s\nattack missed!", 0.5f));
         }
 
         if (player.isFainted()) {

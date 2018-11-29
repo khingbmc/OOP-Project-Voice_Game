@@ -11,11 +11,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import com.vaja.Loader.*;
 import com.vaja.game.battle.animation.*;
 import com.vaja.game.battle.move.MoveDB;
+import com.vaja.game.model.actor.Actor;
 import com.vaja.game.model.world.World;
 import com.vaja.screen.AbstractScreen;
 import com.vaja.screen.BattleScreen;
@@ -35,6 +37,10 @@ public class Vaja extends Game {
 
     private BattleScreen battleScreen;
     private TransitionScreen transitionScreen;
+
+    private Actor monster = null;
+
+    private String monsterName;
 
     private MoveDB moveDatabase;
 
@@ -97,10 +103,14 @@ public class Vaja extends Game {
 
         assetManager.load("res/graphics_packed/tiles/tilepack.atlas", TextureAtlas.class);
         assetManager.load("res/graphics_packed/ui/uipack.atlas", TextureAtlas.class);
+        assetManager.load("res/graphics_unpacked/tiles/brendan_stand_east.png", Texture.class);
         assetManager.load("res/graphics_packed/battle/battlepack.atlas", TextureAtlas.class);
         assetManager.load("res/graphics/pokemon/bulbasaur.png", Texture.class);
+        assetManager.load("res/graphics_unpacked/monster/poring_stand.png", Texture.class);
         assetManager.load("res/graphics/pokemon/slowpoke.png", Texture.class);
         assetManager.load("res/graphics_packed/monster/monster_textures.atlas", TextureAtlas.class);
+
+        assetManager.load("res/graphics_unpacked/tiles/brendan_stand_west.png", Texture.class);
 
         for (int i = 0; i < 32; i++) {
             assetManager.load("res/graphics/statuseffect/attack_"+i+".png", Texture.class);
@@ -128,15 +138,15 @@ public class Vaja extends Game {
         moveDatabase = new MoveDB();
 
         gameScreen = new GameScreen(this);
-        battleScreen = new BattleScreen(this);
+//        battleScreen = new BattleScreen(this);
         transitionScreen = new TransitionScreen(this);
 
-        this.setScreen(battleScreen);
+        this.setScreen(gameScreen);
     }
 
     @Override
     public void render() {
-        //System.out.println(Gdx.graphics.getFramesPerSecond());
+        System.out.println(Gdx.graphics.getFramesPerSecond());
 
         /* UPDATE */
         tweenManager.update(Gdx.graphics.getDeltaTime());
@@ -188,5 +198,21 @@ public class Vaja extends Game {
 
     public String getVersion() {
         return version;
+    }
+
+    public String getMonsterName() {
+        return monsterName;
+    }
+
+    public void setMonsterName(String monsterName) {
+        this.monsterName = monsterName;
+    }
+
+    public Actor getMonster() {
+        return monster;
+    }
+
+    public void setMonster(Actor monster) {
+        this.monster = monster;
     }
 }

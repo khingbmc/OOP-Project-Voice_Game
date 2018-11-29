@@ -3,22 +3,20 @@ package com.vaja.game.battle.animation;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.tweenengine.equations.Linear;
-import aurelienribon.tweenengine.equations.Sine;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class StartBattleAnimation extends BattleAnimation {
 
     /* Delay from start till the pokeball opens */
-    private float pokeballOpen = 0.5f;
+    private float playerOpenTime = 0.5f;
 
     private Texture whiteMask;
 
     public StartBattleAnimation() {
-        super(1.5f);
+        super(0.5f);
     }
 
     @Override
@@ -27,61 +25,26 @@ public class StartBattleAnimation extends BattleAnimation {
 
         TextureAtlas atlas = assetManager.get("res/graphics_packed/battle/battlepack.atlas", TextureAtlas.class);
 
-        /* pokeball being thrown */
-        TextureRegion pokeball = atlas.findRegion("pokeball");
-        BattleSprite pokeballSprite = new BattleSprite(pokeball, -1f, 0f, 1f, 1f);
-        addSprite(pokeballSprite);
-
-        /*
-         * MOVEMENT OF POKEBALL
-         */
-        Tween.to(pokeballSprite, BattleSpriteAccessor.X, pokeballOpen)
-                .target(0f)
-                .ease(Linear.INOUT)
-                .start(tweenManager);
-        Tween.to(pokeballSprite, BattleSpriteAccessor.Y, 0.25f)
-                .target(1f)
-                .ease(Sine.OUT)
-                .start(tweenManager);
-        Tween.to(pokeballSprite, BattleSpriteAccessor.Y, 0.25f)
-                .target(0f)
-                .ease(Sine.IN)
-                .delay(0.25f)
-                .start(tweenManager);
-
-        /*
-         * ROTATION OF POKEBALL
-         */
-        Tween.to(pokeballSprite, BattleSpriteAccessor.ROTATION, 0.5f)
-                .target(2f*360f)
-                .ease(Linear.INOUT)
-                .start(tweenManager);
-
-        Tween.to(pokeballSprite, BattleSpriteAccessor.ALPHA, 0.25f)
-                .target(0f)
-                .ease(Linear.INOUT)
-                .delay(0.7f)
-                .start(tweenManager);
 
 
         /* effects when the ball opens */
-        Animation pokeballEffect = new Animation(0.025f, atlas.findRegions("pokeball_effect"));
+        Animation playerOpent = new Animation(0.025f, atlas.findRegions("pokeball_effect"));
 
-        addEffectSprite(pokeballEffect, 0.5f, 0.62f, tweenManager);
-        addEffectSprite(pokeballEffect, -0.5f, 0.62f, tweenManager);
-        addEffectSprite(pokeballEffect, 0f, 0.8f, tweenManager);
-        addEffectSprite(pokeballEffect, 0.8f, 0f, tweenManager);
-        addEffectSprite(pokeballEffect, -0.8f, 0f, tweenManager);
+        addEffectSprite(playerOpent, 0.5f, 0.62f, tweenManager);
+        addEffectSprite(playerOpent, -0.5f, 0.62f, tweenManager);
+        addEffectSprite(playerOpent, 0f, 0.8f, tweenManager);
+        addEffectSprite(playerOpent, 0.8f, 0f, tweenManager);
+        addEffectSprite(playerOpent, -0.8f, 0f, tweenManager);
 
         this.setPrimaryWidth(0f);
         this.setPrimaryHeight(0f);
         Tween.to(this, BattleAnimationAccessor.PRIMARY_WIDTH, 0.5f)
                 .target(1f)
-                .delay(pokeballOpen)
+                .delay(playerOpenTime)
                 .start(tweenManager);
         Tween.to(this, BattleAnimationAccessor.PRIMARY_HEIGHT, 0.5f)
                 .target(1f)
-                .delay(pokeballOpen)
+                .delay(playerOpenTime)
                 .start(tweenManager);
 
         whiteMask = assetManager.get("res/graphics/statuseffect/white.png", Texture.class);
@@ -90,7 +53,7 @@ public class StartBattleAnimation extends BattleAnimation {
         Tween.to(this, BattleAnimationAccessor.PRIMARY_MASK_AMOUNT, 1f)
                 .target(0f)
                 .ease(Linear.INOUT)
-                .delay(pokeballOpen+0.3f)
+                .delay(playerOpenTime +0.3f)
                 .start(tweenManager);
     }
 
@@ -101,26 +64,26 @@ public class StartBattleAnimation extends BattleAnimation {
                 0f,
                 1f,
                 1f,
-                pokeballOpen);
+                playerOpenTime);
         effectSprite.setAnimationMode(Animation.PlayMode.LOOP);
         effectSprite.setAlpha(0f);
         addSprite(effectSprite);
 
         Tween.to(effectSprite, BattleSpriteAccessor.ALPHA, 0f)
                 .target(1f)
-                .delay(pokeballOpen)
+                .delay(playerOpenTime)
                 .start(tweenManager);
 
         Tween.to(effectSprite, BattleSpriteAccessor.Y, 1f)
                 .target(endY)
                 .ease(Linear.INOUT)
-                .delay(pokeballOpen)
+                .delay(playerOpenTime)
                 .start(tweenManager);
 
         Tween.to(effectSprite, BattleSpriteAccessor.X, 1f)
                 .target(endX)
                 .ease(Linear.INOUT)
-                .delay(pokeballOpen)
+                .delay(playerOpenTime)
                 .start(tweenManager);
     }
 

@@ -24,7 +24,7 @@ public class Monster {
 
     private Texture image;
 
-    public Monster(String name, Texture image) {
+    public Monster(String name, Texture image, int hp) {
         this.name = name;
         this.image = image;
         this.level = 5;
@@ -32,7 +32,7 @@ public class Monster {
         /* init all stats to 1 */
         stats = new HashMap<STAT, Integer>();
         for (STAT stat : STAT.values()) {
-            stats.put(stat, 15);
+            stats.put(stat, hp);
         }
         stats.put(STAT.HITPOINTS, 10);
         currentHitpoints = stats.get(STAT.HITPOINTS);
@@ -99,8 +99,8 @@ public class Monster {
         return currentHitpoints == 0;
     }
 
-    public static Monster generatePokemon(String name, Texture sprite, MoveDB moveDatabase) {
-        Monster generated = new Monster(name, sprite);
+    public static Monster generatePokemon(String name, Texture sprite, MoveDB moveDatabase, int hp) {
+        Monster generated = new Monster(name, sprite, hp);
         generated.setMove(0, moveDatabase.getMove(0));
         generated.setMove(1, moveDatabase.getMove(1));
         generated.setMove(2, moveDatabase.getMove(2));

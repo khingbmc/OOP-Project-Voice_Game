@@ -8,8 +8,8 @@ public class MainGame {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
         config.title = "Vaja_Java";
-        config.height = 400;
-        config.width = 600;
+        config.height = 800;
+        config.width = 1024;
         config.vSyncEnabled = true;
         new LwjglApplication(new Vaja(), config);
     }

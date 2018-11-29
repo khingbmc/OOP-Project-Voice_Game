@@ -2,7 +2,7 @@ package com.vaja.game.model.actor;
 
 /***
  * @author khingbmc
- * this class is update actor state
+ * this class for npc behavior
  */
 public abstract class ActorBehavior {
     private Actor actor;

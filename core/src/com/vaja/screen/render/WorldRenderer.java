@@ -73,6 +73,9 @@ public class WorldRenderer {
                 if (world.getMap().getTile(x, y).getActor() != null) {
                     Actor actor = world.getMap().getTile(x, y).getActor();
                     forRendering.add(actor);
+                    if(x == 7 && y == 14){
+
+                    }
 //                    if(actor.getX() == 31){
 //
 //                        app.setScreen(app.getBattleScreen());
@@ -85,6 +88,7 @@ public class WorldRenderer {
                 }
                 if (world.getMap().getTile(x, y).getObject() != null) {
                     WorldObj object = world.getMap().getTile(x, y).getObject();
+
                     if (renderedObjects.contains(object.hashCode())) { // test if it's already drawn
                         continue;
                     }

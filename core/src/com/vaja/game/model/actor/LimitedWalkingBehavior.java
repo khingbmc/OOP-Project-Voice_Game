@@ -5,6 +5,11 @@ import com.vaja.game.model.DIRECTION;
 
 import java.util.Random;
 
+
+/**
+ * @author khingbmc
+ * this class is limited step walk of npc
+ */
 public class LimitedWalkingBehavior extends ActorBehavior {
 
     private float moveIntervalMinimum;

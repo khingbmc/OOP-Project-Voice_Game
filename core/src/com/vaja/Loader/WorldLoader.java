@@ -14,16 +14,27 @@ import com.badlogic.gdx.math.GridPoint2;
 
 import com.badlogic.gdx.utils.Array;
 import com.vaja.game.battle.Battle;
+import com.vaja.game.dialogue.ChoiceDialogueNode;
+import com.vaja.game.dialogue.Dialogue;
+import com.vaja.game.dialogue.DialogueNode;
+import com.vaja.game.dialogue.LinearDialogueNode;
 import com.vaja.game.model.DIRECTION;
 import com.vaja.game.model.TeleportTile;
 import com.vaja.game.model.Tile;
+import com.vaja.game.model.actor.Actor;
+import com.vaja.game.model.actor.LimitedWalkingBehavior;
+import com.vaja.game.model.actor.NPCActor;
+import com.vaja.game.model.actor.RandomWalking;
 import com.vaja.game.model.world.Door;
 import com.vaja.game.model.world.World;
 import com.vaja.game.model.world.WorldObj;
 import com.vaja.screen.BattleScreen;
+import com.vaja.util.AnimationSet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 
 /**
  * it is resource manage class to loadworld into world
@@ -35,7 +46,8 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
     private Animation flowerAnimation;
     private Animation doorOpen;
     private Animation doorClose;
-    private Animation poringAnimation;
+    private AnimationSet poringAnimation;
+    private AnimationSet npc;
 
 
     public WorldLoader(FileHandleResolver resolver) {
@@ -50,7 +62,16 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
         flowerAnimation = new Animation(0.8f, atlas.findRegions("flowers"), Animation.PlayMode.LOOP_PINGPONG);
         doorOpen = new Animation(0.8f/4f, atlas.findRegions("woodenDoor"), Animation.PlayMode.NORMAL);
         doorClose = new Animation(0.5f/4f, atlas.findRegions("woodenDoor"), Animation.PlayMode.REVERSED);
-        poringAnimation = new Animation(0.8f, monAtlas.findRegions("poring"), Animation.PlayMode.LOOP_PINGPONG);
+        poringAnimation = new AnimationSet(
+                new Animation(0.3f/2f, atlas.findRegions("brendan_walk_north"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, atlas.findRegions("brendan_walk_south"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, atlas.findRegions("brendan_walk_east"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, atlas.findRegions("brendan_walk_west"), Animation.PlayMode.LOOP_PINGPONG),
+                atlas.findRegion("brendan_stand_north"),
+                atlas.findRegion("brendan_stand_south"),
+                atlas.findRegion("brendan_stand_east"),
+                atlas.findRegion("brendan_stand_west")
+        );
 
         BufferedReader reader = new BufferedReader(file.reader());
         int currentLine = 0;
@@ -99,6 +120,7 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
                         break;
                     case "addPoring":
                         addPoring(tokens[1], tokens[2]);
+
                         break;
                     case "teleport":
                         teleport(asset, tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7], tokens[8]);
@@ -148,11 +170,22 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
     private void addPoring(String stringX, String stringY){
         int x = Integer.parseInt(stringX);
         int y = Integer.parseInt(stringY);
+        Actor mon = new Actor(world, x, y, poringAnimation);
+        mon.setLevel(5);
+        mon.setName("Poring");
 
-        GridPoint2[] gridArray = new GridPoint2[1];
-        gridArray[0] = new GridPoint2(0, 0);
-        WorldObj poring = new WorldObj(x, y, true, this.poringAnimation, 3f, 3f, gridArray);
-        world.addObject(poring);
+        LinearDialogueNode node1 = new LinearDialogueNode("WTF ARE you doing", 0);
+
+        Dialogue dialogue = new Dialogue();
+        dialogue.addNode(node1);
+
+
+        mon.setDialogue(dialogue);
+
+        LimitedWalkingBehavior brain = new LimitedWalkingBehavior(mon, 1, 1, 0, 0, 0.3f, 1f, new Random());
+        world.addActor(mon, brain);
+
+
     }
 
 
@@ -246,4 +279,6 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
 
     static public class WorldParameter extends AssetLoaderParameters<World> {
     }
+
+
 }

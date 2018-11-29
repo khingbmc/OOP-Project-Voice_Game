@@ -15,4 +15,14 @@ public class PlayerActor extends Actor {
     public CutscenePlayer getCutscenePlayer() {
         return cutscenePlayer;
     }
+
+    @Override
+    public int getLevel() {
+        return super.getLevel();
+    }
+
+    @Override
+    public void setLevel(int level) {
+        super.setLevel(level);
+    }
 }

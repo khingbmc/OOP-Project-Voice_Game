@@ -59,6 +59,10 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
     private Camera camera;
     private Dialogue dialogue;
 
+    private Actor monster;
+
+    private BattleScreen battleScreen;
+
     /* cutscenes */
     private Queue<CutsceneEvent> eventQueue = new ArrayDeque<CutsceneEvent>();
     private CutsceneEvent currentEvent;
@@ -105,6 +109,7 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
 
         camera = new Camera();
         player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
+        player.setLevel(7);
         world.addActor(player);
 
         initUI();
@@ -165,8 +170,29 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
         dialogueController.update(delta);
 
         if (!dialogueBox.isVisible()) {
+
             camera.update(player.getWorldX()+0.5f, player.getWorldY()+0.5f);
             world.update(delta);
+
+            if(player.isBattle()){
+                player.setBattle(false);
+                System.out.println(monster.getName());
+
+                battleScreen = new BattleScreen(getApp(), monster, player);
+
+                getApp().setScreen(battleScreen);
+
+            }
+        }
+        if(dialogueBox.isVisible()){
+            if (dialogueBox.isFinished()){
+
+                monster = this.world.getMap().getTile(player.getX()+this.player.getFacing().getDx(),
+                        player.getY()+this.player.getFacing().getDy()).getActor();
+                monster.setName(monster.getName());
+                player.setBattle(true);
+
+            }
         }
         uiStage.act(delta);
     }

@@ -5,6 +5,7 @@ public abstract class BattleEvent {
 
     public void begin(BattleEventPlayer player) {
         this.player = player;
+        //texture is come form for BattleEventPlayer
     }
 
     public abstract void update(float delta);

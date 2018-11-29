@@ -10,6 +10,9 @@ import com.vaja.util.AnimationSet;
 
 public class Actor implements YSortable {
 
+    private int level;
+    private boolean battle;
+    private String name;
     private World world;
     private int x;
     private int y;
@@ -25,7 +28,7 @@ public class Actor implements YSortable {
     private int srcX, srcY;
     private int destX, destY;
     private float animTimer;
-    private float WALK_TIME_PER_TILE = 0.1f;
+    private float WALK_TIME_PER_TILE = 0.15f;
     private float REFACE_TIME = 0.1f;
     private boolean noMoveNotifications = false;
 
@@ -54,6 +57,8 @@ public class Actor implements YSortable {
         WALKING,
         STANDING,
         REFACING,
+        BATTLE,
+
         ;
     }
 
@@ -159,6 +164,8 @@ public class Actor implements YSortable {
         return false;
     }
 
+
+
     /**
      * Same as #move() but doesn't notify receiving Tile.
      * Doesn't obey Tile#actorBeforeStep and Tile#actorStep
@@ -200,6 +207,14 @@ public class Actor implements YSortable {
         y += dir.getDy();
         world.getMap().getTile(x, y).setActor(this);
         return true;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     private void initializeMove(DIRECTION dir) {
@@ -266,6 +281,14 @@ public class Actor implements YSortable {
         return animations.getStanding(DIRECTION.SOUTH);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public float getSizeX() {
         return 1;
@@ -281,6 +304,10 @@ public class Actor implements YSortable {
         this.teleport(newX, newY);
         this.world = world;
         this.world.addActor(this);
+    }
+
+    public void loser(){
+        this.world.removeActor(this);
     }
 
     public ACTOR_STATE getState() {
@@ -317,5 +344,13 @@ public class Actor implements YSortable {
 
     public boolean isVisible() {
         return visible;
+    }
+
+    public boolean isBattle() {
+        return battle;
+    }
+
+    public void setBattle(boolean battle) {
+        this.battle = battle;
     }
 }

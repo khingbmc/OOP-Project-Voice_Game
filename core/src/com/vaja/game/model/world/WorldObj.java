@@ -1,5 +1,6 @@
 package com.vaja.game.model.world;
 
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.GridPoint2;
@@ -13,7 +14,7 @@ import java.util.List;
  * this class is contains object in the world eg. tree house etc.
  */
 
-public class WorldObj implements YSortable{
+public class WorldObj extends InputAdapter implements YSortable{
 
     private float sizeX, sizeY;
     private int x, y;
