@@ -75,9 +75,10 @@ public class InterfaceGui extends javax.swing.JFrame implements ActionListener {
         
         
         //img charector
-        jLabel3.setMaximumSize(new java.awt.Dimension(60, 45));
-        jLabel3.setBounds(340, 230, 80, 120);
-        jLabel3.setSize(100, 120);
+        jLabel3.setIcon(new javax.swing.ImageIcon("res/Gui/Std_logo.png"));
+        jLabel3.setMaximumSize(new java.awt.Dimension(200,150));
+        jLabel3.setBounds(280, 230, 80, 120);
+        jLabel3.setSize(200, 150);
         jPanel1.add(jLabel3);
 
         //LOGO
