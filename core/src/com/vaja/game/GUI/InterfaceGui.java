@@ -41,10 +41,14 @@ public class InterfaceGui extends javax.swing.JFrame implements ActionListener {
         setLocationByPlatform(true);
         setUndecorated(true);
 
+        
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.setRequestFocusEnabled(false);
         jPanel1.setLayout(new BorderLayout());
-//        (new eclise.lib.awtextra.AbsoluteLayout())
+        
+       
+        
         mB4.setText("New Game");
         mB4.setToolTipText("");
         mB4.addActionListener(new java.awt.event.ActionListener() {
@@ -52,16 +56,10 @@ public class InterfaceGui extends javax.swing.JFrame implements ActionListener {
                 mB4ActionPerformed(evt);
             }
         });
-//        jPanel1.add(mB4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 110, 30));
-        mB4.setBounds(140, 140, 110, 30);
-        mB4.setSize(100, 30);
+//        mB4.setSize(100, 30);
+        mB4.setBounds(60, 270, 230, 50);
         jPanel1.add(mB4);
         
-        mB3.setText("Load Game");
-//        jPanel1.add(mB3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 110, 30));
-        mB3.setBounds(140, 190, 110, 30);
-        mB3.setSize(100, 30);
-        jPanel1.add(mB3);
         
         mB2.setText("Exit Game");
         mB2.addActionListener(new java.awt.event.ActionListener() {
@@ -69,62 +67,44 @@ public class InterfaceGui extends javax.swing.JFrame implements ActionListener {
                 mB2ActionPerformed(evt);
             }
         });
-//        jPanel1.add(mB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 110, 30));
-        mB2.setBounds(140, 240, 110, 30);
-        mB2.setSize(100, 30);
+        mB2.setBounds(480, 270, 230, 50);
+//        mB2.setSize(100, 30);
         jPanel1.add(mB2);
         
 
         
         
         //img charector
-        jLabel3.setIcon(new javax.swing.ImageIcon("res\\graphics_unpacked\\tiles\\brendan_walk_east_2.png")); // NOI18N
         jLabel3.setMaximumSize(new java.awt.Dimension(60, 45));
-        jLabel3.setBounds(40,180, 40, 1200);
+        jLabel3.setBounds(340, 230, 80, 120);
         jLabel3.setSize(100, 120);
         jPanel1.add(jLabel3);
 
         //LOGO
-        jLabel4.setIcon(new javax.swing.ImageIcon("res/Gui/logo3.png"));// NOI18N
-        jLabel4.setMaximumSize(new java.awt.Dimension(60, 45));
-        jLabel4.setBounds(80, 20, 240, 80);
+        jLabel4.setIcon(new javax.swing.ImageIcon("res/Gui/logo4.png"));// NOI18N
+        jLabel4.setBounds(230, 50, 340, 120);
         jLabel4.setSize(500, 120);
         jPanel1.add(jLabel4);
 
         
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-
-//        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
-        jPanel2.setBounds(120, 30, -1, -1);
-        jPanel2.setSize(100, 30);
-        jPanel1.add(jLabel2);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("res/Gui/bg.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("res/Gui/bg4.jpg")); // NOI18N
+        jLabel2.setMaximumSize(new java.awt.Dimension(750, 450));
+        jLabel2.setMinimumSize(new java.awt.Dimension(750, 450));
+        jLabel2.setPreferredSize(new java.awt.Dimension(750, 450));
+        jLabel2.setBounds(0, 0, 750, 400);
         jPanel1.add(jLabel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+          .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        		);
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,400, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+        
 
         pack();
     }// </editor-fold>          DesktopLauncher              

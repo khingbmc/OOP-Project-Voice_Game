@@ -1,4 +1,4 @@
-first_town      100 100             98  98
+first_town      100 100             51 13
 //37  13
 fillTerrain             GRASS
 
