@@ -4,8 +4,8 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.assets.AssetManager;
 
-public class GoAnimation extends BattleAnimation {
-    public GoAnimation() {
+public class OpenAnimation extends BattleAnimation {
+    public OpenAnimation() {
         super(0.8f);
     }
 

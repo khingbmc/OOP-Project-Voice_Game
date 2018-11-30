@@ -1,6 +1,7 @@
 package com.vaja.game.battle.move;
 
 import com.vaja.game.Vaja;
+
 import com.vaja.game.battle.BATTLE_PARTY;
 import com.vaja.game.battle.BattleMechanics;
 import com.vaja.game.battle.animation.BattleAnimation;

@@ -5,6 +5,7 @@ import com.vaja.game.battle.animation.StartBattleAnimation;
 import com.vaja.game.battle.event.*;
 import com.vaja.game.battle.move.Move;
 import com.vaja.game.model.Monster;
+import com.vaja.voice.SpeechRecognize;
 
 /**
  * i used template pokemon fight
@@ -55,7 +56,7 @@ public class Battle implements BattleEventQueuer {
      */
     public void beginBattle() {
         queueEvent(new MonsterSpriteEvent(opponent.getSprite(), BATTLE_PARTY.OPPONENT));
-        queueEvent(new TextEvent("I'm"+player.getName()+" Dovakhins!", 1f));
+        queueEvent(new TextEvent("I'm "+player.getName()+"!!!", 1f));
         queueEvent(new MonsterSpriteEvent(player.getSprite(), BATTLE_PARTY.PLAYER));
         queueEvent(new AnimationBattleEvent(BATTLE_PARTY.PLAYER, new StartBattleAnimation()));
     }
@@ -133,12 +134,28 @@ public class Battle implements BattleEventQueuer {
 
         /* Broadcast the text graphics */
         queueEvent(new TextEvent(battleUser.getName()+" used\n"+move.getName().toUpperCase()+"!", 0.5f));
-
-        if (mechanics.attemptHit(move, battleUser, monsTarget)) {
-            move.useMove(mechanics, battleUser, monsTarget, user, this);
-        } else { // miss
-            /* Broadcast the text graphics */
-            queueEvent(new TextEvent(battleUser.getName()+"'s\nattack missed!", 0.5f));
+        
+        SpeechRecognize speech = new SpeechRecognize();
+//        mechanics.attemptHit(move, battleUser, monsTarget)
+        
+        if (battleUser.getName().equals("Brian")) {
+        	
+        	queueEvent(new TextEvent(speech.getMessage()[1], 0.5f));
+        	queueEvent(new TextEvent("You Said:"+speech.getResultText(), 0.5f));
+            if(speech.getResultText().equals("dog") || speech.getResultText().equals("ant")) {
+            	
+            	move.useMove(mechanics, battleUser, monsTarget, user, this);
+            }else { // miss
+                /* Broadcast the text graphics */
+                queueEvent(new TextEvent(battleUser.getName()+"'s\nattack missed!", 0.5f));
+            }
+        } else {
+        	if(mechanics.attemptHit(move, battleUser, monsTarget)) {
+            	move.useMove(mechanics, battleUser, monsTarget, user, this);
+            }else { // miss
+                /* Broadcast the text graphics */
+                queueEvent(new TextEvent(battleUser.getName()+"'s\nattack missed!", 0.5f));
+            }
         }
 
         if (player.isFainted()) {

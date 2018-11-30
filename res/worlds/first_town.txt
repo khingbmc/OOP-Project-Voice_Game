@@ -5901,7 +5901,10 @@ addTree     90  7
 addDragon   45   14
 
 
-//addDragon   47  13
+addDragon   47  13
+
+addDragon	43	20
+addDragon	42	17
 
 //teleport		7	14	GRASS	map_indoor		3	0	NORTH	WHITE
 //teleport        9   6   GRASS   map_indoor      3   0   NORTH   WHITE

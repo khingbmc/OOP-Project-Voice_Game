@@ -188,7 +188,7 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
         }
         if(dialogueBox.isVisible()){
             if (dialogueBox.isFinished()){
-
+           
                 monster = this.world.getMap().getTile(player.getX()+this.player.getFacing().getDx(),
                         player.getY()+this.player.getFacing().getDy()).getActor();
                 monster.setSizeX(2);

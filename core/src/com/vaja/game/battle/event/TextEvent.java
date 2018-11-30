@@ -46,7 +46,7 @@ public class TextEvent extends BattleEvent {
     public void update(float delta) {
         if (dialogue.isFinished()) {
             if (awaitInput) {
-                if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
                     finished = true;
                 }
             } else {

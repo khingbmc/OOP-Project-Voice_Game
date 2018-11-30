@@ -1,15 +1,3 @@
-/*
- * Copyright 1999-2004 Carnegie Mellon University.
- * Portions Copyright 2004 Sun Microsystems, Inc.
- * Portions Copyright 2004 Mitsubishi Electric Research Laboratories.
- * All Rights Reserved.  Use is subject to license terms.
- *
- * See the file "license.terms" for information on usage and
- * redistribution of this file, and for a DISCLAIMER OF ALL
- * WARRANTIES.
- *
- */
-
 package com.vaja.voice;
 
 import edu.cmu.sphinx.frontend.util.Microphone;
@@ -38,9 +26,10 @@ public class SpeechRecognize {
 	
 	private Recognizer recognizer;
 	private Microphone microphone;
+	private String[] message;
 	
 	public SpeechRecognize() {
-		
+		message = new String[2];
 		try {
             URL url;
             
@@ -61,22 +50,20 @@ public class SpeechRecognize {
             /* the microphone will keep recording until the program exits */
 	    if (microphone.startRecording()) {
 
-		System.out.println
-		    ("Say: ");
+		this.message[0] = "Start speaking.(dog | love | ant | sexy)";
 
 		
-		    System.out.println
-			("Start speaking. Press Ctrl-C to quit.\n");
+		this.message[1] = "Waiting....";
+		
+		
 
-                    /*
-                     * This method will return when the end of speech
-                     * is reached. Note that the endpointer will determine
-                     * the end of speech.
-                     */ 
+                    
 		    Result result = recognizer.recognize();
 		    
 		    if (result != null) {
+		    	
 			resultText = result.getBestFinalResultNoFiller();
+			System.out.println(resultText);
 			
 		    } else {
 			System.out.println("I can't hear what you said.\n");
@@ -107,8 +94,11 @@ public class SpeechRecognize {
 
 
 
-	public static void main(String[] args) {
-		SpeechRecognize speech = new SpeechRecognize();
-        System.out.println("You said: " + speech.getResultText()  + "\n");
-    }
+	public String[] getMessage() {
+		return message;
+	}
+
+	
+
+	
 }

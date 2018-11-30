@@ -1,6 +1,7 @@
 package com.vaja.Loader;
 
 import com.badlogic.gdx.assets.AssetDescriptor;
+
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.AsynchronousAssetLoader;
@@ -40,7 +41,7 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
     private Animation doorOpen;
     private Animation doorClose;
     private AnimationSet dragonAnimation;
-    private AnimationSet npc;
+   
 
 
     public WorldLoader(FileHandleResolver resolver) {
@@ -164,7 +165,7 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
         int x = Integer.parseInt(stringX);
         int y = Integer.parseInt(stringY);
         Actor mon = new Actor(world, x, y, dragonAnimation);
-        mon.setLevel(10);
+        mon.setLevel(5);
         mon.setName("Dark Dragon");
 
         LinearDialogueNode node1 = new LinearDialogueNode("Don't translate because it a Dragon Language", 0);
