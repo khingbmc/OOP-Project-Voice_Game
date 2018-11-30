@@ -11,6 +11,7 @@ import com.vaja.util.AnimationSet;
 public class Actor implements YSortable {
 
     private int level;
+    private float sizeX, sizeY;
     private boolean battle;
     private String name;
     private World world;
@@ -291,12 +292,20 @@ public class Actor implements YSortable {
 
     @Override
     public float getSizeX() {
-        return 1;
+        return sizeX;
     }
 
     @Override
     public float getSizeY() {
-        return 1.5f;
+        return sizeY;
+    }
+
+    public void setSizeX(float sizeX) {
+        this.sizeX = sizeX;
+    }
+
+    public void setSizeY(float sizeY) {
+        this.sizeY = sizeY;
     }
 
     public void changeWorld(World world, int newX, int newY) {

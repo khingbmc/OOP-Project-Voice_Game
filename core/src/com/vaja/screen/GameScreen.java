@@ -109,6 +109,8 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
 
         camera = new Camera();
         player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
+        player.setSizeX(1);
+        player.setSizeY(1.5f);
         player.setLevel(7);
         world.addActor(player);
 
@@ -189,6 +191,8 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
 
                 monster = this.world.getMap().getTile(player.getX()+this.player.getFacing().getDx(),
                         player.getY()+this.player.getFacing().getDy()).getActor();
+                monster.setSizeX(2);
+                monster.setSizeY(2.5f);
                 monster.setName(monster.getName());
                 player.setBattle(true);
 

@@ -72,6 +72,7 @@ public class WorldRenderer {
             for (int y = 0; y < world.getMap().getHeight(); y++) {
                 if (world.getMap().getTile(x, y).getActor() != null) {
                     Actor actor = world.getMap().getTile(x, y).getActor();
+
                     forRendering.add(actor);
                     if(x == 7 && y == 14){
 

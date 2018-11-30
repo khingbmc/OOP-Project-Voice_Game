@@ -13,27 +13,20 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.GridPoint2;
 
 import com.badlogic.gdx.utils.Array;
-import com.vaja.game.battle.Battle;
-import com.vaja.game.dialogue.ChoiceDialogueNode;
 import com.vaja.game.dialogue.Dialogue;
-import com.vaja.game.dialogue.DialogueNode;
 import com.vaja.game.dialogue.LinearDialogueNode;
 import com.vaja.game.model.DIRECTION;
 import com.vaja.game.model.TeleportTile;
 import com.vaja.game.model.Tile;
 import com.vaja.game.model.actor.Actor;
 import com.vaja.game.model.actor.LimitedWalkingBehavior;
-import com.vaja.game.model.actor.NPCActor;
-import com.vaja.game.model.actor.RandomWalking;
 import com.vaja.game.model.world.Door;
 import com.vaja.game.model.world.World;
 import com.vaja.game.model.world.WorldObj;
-import com.vaja.screen.BattleScreen;
 import com.vaja.util.AnimationSet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -46,7 +39,7 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
     private Animation flowerAnimation;
     private Animation doorOpen;
     private Animation doorClose;
-    private AnimationSet poringAnimation;
+    private AnimationSet dragonAnimation;
     private AnimationSet npc;
 
 
@@ -62,15 +55,15 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
         flowerAnimation = new Animation(0.8f, atlas.findRegions("flowers"), Animation.PlayMode.LOOP_PINGPONG);
         doorOpen = new Animation(0.8f/4f, atlas.findRegions("woodenDoor"), Animation.PlayMode.NORMAL);
         doorClose = new Animation(0.5f/4f, atlas.findRegions("woodenDoor"), Animation.PlayMode.REVERSED);
-        poringAnimation = new AnimationSet(
-                new Animation(0.3f/2f, atlas.findRegions("brendan_walk_north"), Animation.PlayMode.LOOP_PINGPONG),
-                new Animation(0.3f/2f, atlas.findRegions("brendan_walk_south"), Animation.PlayMode.LOOP_PINGPONG),
-                new Animation(0.3f/2f, atlas.findRegions("brendan_walk_east"), Animation.PlayMode.LOOP_PINGPONG),
-                new Animation(0.3f/2f, atlas.findRegions("brendan_walk_west"), Animation.PlayMode.LOOP_PINGPONG),
-                atlas.findRegion("brendan_stand_north"),
-                atlas.findRegion("brendan_stand_south"),
-                atlas.findRegion("brendan_stand_east"),
-                atlas.findRegion("brendan_stand_west")
+        dragonAnimation = new AnimationSet(
+                new Animation(0.3f/2f, monAtlas.findRegions("dragon_walk_north"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, monAtlas.findRegions("dragon_walk_south"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, monAtlas.findRegions("dragon_walk_east"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, monAtlas.findRegions("dragon_walk_west"), Animation.PlayMode.LOOP_PINGPONG),
+                monAtlas.findRegion("dragon_stand_north"),
+                monAtlas.findRegion("dragon_stand_south"),
+                monAtlas.findRegion("dragon_stand_east"),
+                monAtlas.findRegion("dragon_stand_west")
         );
 
         BufferedReader reader = new BufferedReader(file.reader());
@@ -118,8 +111,8 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
                     case "addDoor":
                         addDoor(tokens[1], tokens[2]);
                         break;
-                    case "addPoring":
-                        addPoring(tokens[1], tokens[2]);
+                    case "addDragon":
+                        addDragon(tokens[1], tokens[2]);
 
                         break;
                     case "teleport":
@@ -167,20 +160,22 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
         world.addObject(flowers);
     }
 
-    private void addPoring(String stringX, String stringY){
+    private void addDragon(String stringX, String stringY){
         int x = Integer.parseInt(stringX);
         int y = Integer.parseInt(stringY);
-        Actor mon = new Actor(world, x, y, poringAnimation);
-        mon.setLevel(5);
-        mon.setName("Poring");
+        Actor mon = new Actor(world, x, y, dragonAnimation);
+        mon.setLevel(10);
+        mon.setName("Dark Dragon");
 
-        LinearDialogueNode node1 = new LinearDialogueNode("WTF ARE you doing", 0);
+        LinearDialogueNode node1 = new LinearDialogueNode("Don't translate because it a Dragon Language", 0);
 
         Dialogue dialogue = new Dialogue();
         dialogue.addNode(node1);
 
 
         mon.setDialogue(dialogue);
+        mon.setSizeX(2);
+        mon.setSizeY(2.5f);
 
         LimitedWalkingBehavior brain = new LimitedWalkingBehavior(mon, 1, 1, 0, 0, 0.3f, 1f, new Random());
         world.addActor(mon, brain);

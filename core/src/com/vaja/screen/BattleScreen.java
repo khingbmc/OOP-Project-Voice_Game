@@ -89,8 +89,8 @@ public class BattleScreen extends AbstractScreen implements BattleEventPlayer {
         Texture player = app.getAssetManager().get("res/graphics_unpacked/tiles/brendan_stand_west.png", Texture.class);
 
 
-        if(monsterP.getName().equals("Poring")){
-            this.monster = app.getAssetManager().get("res/graphics_unpacked/monster/poring_stand.png", Texture.class);
+        if(monsterP.getName().equals("Dark Dragon")){
+            this.monster = app.getAssetManager().get("res/graphics/monster/dragon_stand_west.png", Texture.class);
 
         }
 
@@ -171,9 +171,7 @@ public class BattleScreen extends AbstractScreen implements BattleEventPlayer {
                     battle.setState(Battle.STATE.READY_TO_PROGRESS);
                     getApp().setScreen(getApp().getGameScreen());
                 } else if (battle.getState() == Battle.STATE.LOSE) {
-                    this.monsterP.setVisible(false);
 
-                    monsterP.getWorld().removeActor(monsterP);
                     battle.setState(Battle.STATE.READY_TO_PROGRESS);
                     getApp().setScreen(getApp().getGameScreen());
                 } else if (battle.getState() == Battle.STATE.RAN) {
@@ -206,9 +204,9 @@ public class BattleScreen extends AbstractScreen implements BattleEventPlayer {
         }
         batch.end();
 
-        if (battleDebug) {
-            battleDebugRenderer.render();
-        }
+//        if (battleDebug) {
+//            battleDebugRenderer.render();
+//        }
 
         uiStage.draw();
     }

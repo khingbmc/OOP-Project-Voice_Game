@@ -14,7 +14,7 @@ public class Trainer {
         team.add(game);
     }
 
-    public boolean addPokemon(Monster game) {
+    public boolean addMonster(Monster game) {
         if (team.size() >= 6) {
             return false;
         } else {
