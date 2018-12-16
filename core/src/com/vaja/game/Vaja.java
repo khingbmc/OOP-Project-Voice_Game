@@ -126,6 +126,7 @@ public class Vaja extends Game {
 
         File dir = new File("res/worlds/");
         File[] directoryListing = dir.listFiles();
+        System.out.println(directoryListing);
         if (directoryListing != null) {
             for (File child : directoryListing) {
                 System.out.println("Loading world "+child.getPath());

@@ -1,11 +1,21 @@
 package com.vaja.game.battle;
 
+import java.io.IOException;
+
+import java.net.URL;
+
 import com.vaja.game.battle.animation.FaintingAnimation;
 import com.vaja.game.battle.animation.StartBattleAnimation;
 import com.vaja.game.battle.event.*;
 import com.vaja.game.battle.move.Move;
 import com.vaja.game.model.Monster;
 import com.vaja.voice.SpeechRecognize;
+
+import edu.cmu.sphinx.frontend.util.Microphone;
+import edu.cmu.sphinx.recognizer.Recognizer;
+import edu.cmu.sphinx.result.Result;
+import edu.cmu.sphinx.util.props.ConfigurationManager;
+import edu.cmu.sphinx.util.props.PropertyException;
 
 /**
  * i used template pokemon fight
@@ -41,6 +51,11 @@ public class Battle implements BattleEventQueuer {
     private Trainer playerTrainer;
     private Trainer opponentTrainer;
     private SpeechRecognize speech;
+    
+    private String resultText;
+	private Recognizer recognizer;
+	private Microphone microphone;
+	private String[] message;
 
     private BattleEventPlayer eventPlayer;
 
@@ -65,6 +80,79 @@ public class Battle implements BattleEventQueuer {
     public void setState(STATE state) {
         this.state = state;
     }
+    
+    public void recognizer() {
+    	this.message = new String[2];
+    	try {
+            URL url;
+            
+            url = SpeechRecognize.class.getResource("helloworld.config.xml");
+           
+
+            System.out.println();
+            queueEvent(new TextEvent("Loading...", 0.5f));
+            
+        	
+
+            ConfigurationManager cm = new ConfigurationManager(url);
+
+            recognizer = (Recognizer) cm.lookup("recognizer");
+            microphone = (Microphone) cm.lookup("microphone");
+
+
+            /* allocate the resource necessary for the recognizer */
+            recognizer.allocate();
+
+            /* the microphone will keep recording until the program exits */
+	    if (microphone.startRecording()) {
+
+		this.message[0] = "Start speaking.(dog | love | ant | sexy)";
+		queueEvent(new TextEvent(getMessage()[0], 0.5f));
+
+		
+		this.message[1] = "Waiting....";
+		queueEvent(new TextEvent(getMessage()[1], 0.5f));
+		
+
+                    
+		    Result result = recognizer.recognize();
+		    
+		    if (result != null) {
+		    	
+			resultText = result.getBestFinalResultNoFiller();
+			System.out.println(resultText);
+			
+		    } else {
+			System.out.println("I can't hear what you said.\n");
+		    }
+		    queueEvent(new TextEvent("You Said: "+getResultText(), 0.5f));
+		
+	    } else {
+		System.out.println("Cannot start microphone.");
+		recognizer.deallocate();
+		System.exit(1);
+	    }
+        } catch (IOException e) {
+            System.err.println("Problem when loading HelloWorld: " + e);
+            e.printStackTrace();
+        } catch (PropertyException e) {
+            System.err.println("Problem configuring HelloWorld: " + e);
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            System.err.println("Problem creating HelloWorld: " + e);
+            e.printStackTrace();
+        }
+    }
+    
+    public String getResultText() {
+		return resultText;
+	}
+
+
+
+	public String[] getMessage() {
+		return message;
+	}
 
     /**
      * Progress the battle one turn.
@@ -105,7 +193,7 @@ public class Battle implements BattleEventQueuer {
                 0f));
         queueEvent(new MonsterSpriteEvent(monster.getSprite(), BATTLE_PARTY.PLAYER));
         queueEvent(new NameChangeEvent(monster.getName(), BATTLE_PARTY.PLAYER));
-        queueEvent(new TextEvent("ชื่อของฉันคือ "+monster.getName()+" สุดเท่ไงล่ะ!"));
+        queueEvent(new TextEvent(" "+monster.getName()+" สุดเท่ไงล่ะ!"));
         queueEvent(new AnimationBattleEvent(BATTLE_PARTY.PLAYER, new StartBattleAnimation()));
         this.state = STATE.READY_TO_PROGRESS;
     }
@@ -137,17 +225,14 @@ public class Battle implements BattleEventQueuer {
         /* Broadcast the text graphics */
         queueEvent(new TextEvent(battleUser.getName()+" used\n"+move.getName().toUpperCase()+"!", 0.5f));
         
-        if(num == 0) {
-        	speech = new SpeechRecognize();
-        }
+        
         
         //        mechanics.attemptHit(move, battleUser, monsTarget)
         
         if (battleUser.getName().equals("Brian")) {
+        	recognizer();
         	
-        	queueEvent(new TextEvent(speech.getMessage()[1], 0.5f));
-        	queueEvent(new TextEvent("You Said:"+speech.getResultText(), 0.5f));
-            if(speech.getResultText().equals("dog") || speech.getResultText().equals("ant")) {
+            if(getResultText().equals("dog") || getResultText().equals("ant")) {
             	num++;
             	move.useMove(mechanics, battleUser, monsTarget, user, this);
             }else { // miss
@@ -172,13 +257,10 @@ public class Battle implements BattleEventQueuer {
                     break;
                 }
             }
-            if (anyoneAlive) {
-                queueEvent(new TextEvent(player.getName()+" fainted!", true));
-                this.state = STATE.SELECT_NEW_POKEMON;
-            } else {
-                queueEvent(new TextEvent("Unfortunately, you've lost...", true));
+            if (!anyoneAlive) {
+            	queueEvent(new TextEvent("You're Die ", true));
                 this.state = STATE.LOSE;
-            }
+            } 
         } else if (opponent.isFainted()) {
             queueEvent(new AnimationBattleEvent(BATTLE_PARTY.OPPONENT, new FaintingAnimation()));
             queueEvent(new TextEvent("Congratulations! You Win!", true));
