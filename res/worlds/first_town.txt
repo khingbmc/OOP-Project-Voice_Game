@@ -6213,7 +6213,7 @@ addFlowers      3  3
 //addFlowers      4  2
 
 //Boss MAP
-addFlowers      98  97
+addDragon     98  97
 
 
 

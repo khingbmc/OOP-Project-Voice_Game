@@ -40,6 +40,7 @@ public class Battle implements BattleEventQueuer {
 
     private Trainer playerTrainer;
     private Trainer opponentTrainer;
+    private SpeechRecognize speech;
 
     private BattleEventPlayer eventPlayer;
 
@@ -118,6 +119,7 @@ public class Battle implements BattleEventQueuer {
     }
 
     private void playTurn(BATTLE_PARTY user, int input) {
+    	int num = 0;
         BATTLE_PARTY target = BATTLE_PARTY.getOpposite(user);
 
         Monster battleUser = null;
@@ -135,15 +137,18 @@ public class Battle implements BattleEventQueuer {
         /* Broadcast the text graphics */
         queueEvent(new TextEvent(battleUser.getName()+" used\n"+move.getName().toUpperCase()+"!", 0.5f));
         
-        SpeechRecognize speech = new SpeechRecognize();
-//        mechanics.attemptHit(move, battleUser, monsTarget)
+        if(num == 0) {
+        	speech = new SpeechRecognize();
+        }
+        
+        //        mechanics.attemptHit(move, battleUser, monsTarget)
         
         if (battleUser.getName().equals("Brian")) {
         	
         	queueEvent(new TextEvent(speech.getMessage()[1], 0.5f));
         	queueEvent(new TextEvent("You Said:"+speech.getResultText(), 0.5f));
             if(speech.getResultText().equals("dog") || speech.getResultText().equals("ant")) {
-            	
+            	num++;
             	move.useMove(mechanics, battleUser, monsTarget, user, this);
             }else { // miss
                 /* Broadcast the text graphics */
