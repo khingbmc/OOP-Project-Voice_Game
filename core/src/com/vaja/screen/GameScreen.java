@@ -108,7 +108,7 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
         for (World w : loadWorlds) {
             worlds.put(w.getName(), w);
         }
-        state = "save";
+        state = "save1";
         if (state.equals("save1")) {
             world = worlds.get("save1");
 
@@ -186,7 +186,7 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
             queueRenderer = new EventQueueRenderer(app.getSkin(), eventQueue);
             tileInfoRenderer = new TileInfoRenderer(world, camera);
         }
-        else {
+        if (state.equals("first")) {
             world = worlds.get("first_town");
 
             camera = new Camera();
