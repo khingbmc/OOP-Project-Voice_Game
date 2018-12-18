@@ -5898,13 +5898,7 @@ addTree     90  6
 addTree     90  7
 
 
-addCentapide	45   14
 
-
-addDragon   47  13
-
-addDragon	43	20
-addDragon	42	17
 
 //teleport		7	14	GRASS	map_indoor		3	0	NORTH	WHITE
 //teleport        9   6   GRASS   map_indoor      3   0   NORTH   WHITE
@@ -5933,61 +5927,61 @@ addTree     93  7
 
 addFlowers      61  3
 addFlowers      61  4
-addFlowers      62  3
+addBird			62  3
 addFlowers      62  4
 
 
 addFlowers      66  68
 addFlowers      66  69
-addFlowers      67  68
+addBird			67  68
 addFlowers      67  69
 
 
 addFlowers      86  9
 addFlowers      86  10
-addFlowers      87  9
+addBird			87  9
 addFlowers      87  10
 
 
 addFlowers      79  51
 addFlowers      79  52
-addFlowers      80  51
+addBird			80  51
 addFlowers      80  52
 
 
 addFlowers      52  82
 addFlowers      52  83
-addFlowers      53  82
+addBird			53  82
 addFlowers      53  83
 
 
 addFlowers      52  45
 addFlowers      52  46
-addFlowers      53  45
+addBird			53  45
 addFlowers      53  46
 
 
 addFlowers      35  50
 addFlowers      35  51
-addFlowers      34  50
+addBird			34  50
 addFlowers      34  51
 
 
 addFlowers      13  30
 addFlowers      13  31
-addFlowers      14  30
+addBird			14  30
 addFlowers      14  31
 
 
 addFlowers      7  76
 addFlowers      7  77
-addFlowers      8  76
+addBird			8  76
 addFlowers      8  77
 
 
 addFlowers      5  51
 addFlowers      5  52
-addFlowers      6  51
+addBird			6  51
 addFlowers      6  52
 
 

@@ -19,7 +19,7 @@ public class MoveDB {
                 new MoveSpecification(
                         MOVE_TYPE.NORMAL,
                         MOVE_CATEGORY.PHYSICAL,
-                        50,
+                        25,
                         1f,
                         35,
                         "Tackle",
@@ -29,31 +29,31 @@ public class MoveDB {
                 new MoveSpecification(
                         MOVE_TYPE.WATER,
                         MOVE_CATEGORY.SPECIAL,
-                        40,
+                        50,
                         1f,
                         25,
-                        "Water Gun",
-                        "Squirts water to attack the foe."),
+                        "Fus Ro Dah!",
+                        "Ahhhhhhhhhhhhh"),
                 ChargeAnimation.class));
         addMove(new DamageMove(
                 new MoveSpecification(
                         MOVE_TYPE.NORMAL,
                         MOVE_CATEGORY.PHYSICAL,
-                        40,
+                        75,
                         1f,
                         35,
-                        "Scratch",
-                        "Scratches the foe with sharp claws."),
+                        "Ha do Ken!",
+                        "Ha do ken"),
                 ChargeAnimation.class));
         addMove(new DamageMove(
                 new MoveSpecification(
                         MOVE_TYPE.DRAGON,
                         MOVE_CATEGORY.PHYSICAL,
-                        80,
+                        100,
                         1f,
                         15,
-                        "Dragon Claw",
-                        "Hooks and slashes the foe with long, sharp claws."),
+                        "Khame Khame Ha!",
+                        "Boom!"),
                 ChargeAnimation.class));
     }
 

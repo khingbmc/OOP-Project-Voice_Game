@@ -7,7 +7,7 @@
 
 grammar grammar;
 
-public <feelings>  = ( how are you | say hello);
+
 
 public <tackle> = ( bat | rat | hat | bank | chef);
 

@@ -25,4 +25,5 @@ public class PlayerActor extends Actor {
     public void setLevel(int level) {
         super.setLevel(level);
     }
+    
 }

@@ -99,6 +99,9 @@ public class BattleScreen extends AbstractScreen implements BattleEventPlayer {
         if(monsterP.getName().equals("Worm")) {
         	this.monster = app.getAssetManager().get("res/graphics/monster/centapide_stand_west.png",Texture.class);
         }
+        if(monsterP.getName().equals("Bird")) {
+        	this.monster = app.getAssetManager().get("res/graphics/monster/bird_stand_west.png",Texture.class);
+        }
         
 
 

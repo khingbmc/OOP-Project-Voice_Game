@@ -56,7 +56,8 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
     private HashMap<String, World> worlds = new HashMap<String, World>();
     private World world;
     
-    private String state;
+    private String state = "first";
+    private int number;
     
     private PlayerActor player;
     private Camera camera;
@@ -109,15 +110,15 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
         for (World w : loadWorlds) {
             worlds.put(w.getName(), w);
         }
-        state = "first";
         if (state.equals("save1")) {
             world = worlds.get("save1");
 
             camera = new Camera();
             player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
             player.setSizeX(1);
+           
             player.setSizeY(1.5f);
-            player.setLevel(15);
+            player.setLevel(10);
             world.addActor(player);
 
             initUI();
@@ -212,10 +213,32 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
             queueRenderer = new EventQueueRenderer(app.getSkin(), eventQueue);
             tileInfoRenderer = new TileInfoRenderer(world, camera); 
         }
-        
     }
 
-    @Override
+    
+    public int getNumber() {
+		return number;
+	}
+
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+
+	public String getState() {
+		return state;
+	}
+
+
+	public void setState(String state) {
+		this.state = state;
+        System.out.println(this.state);
+
+	}
+
+
+	@Override
     public void dispose() {
 
     }

@@ -40,7 +40,7 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
     private Animation flowerAnimation;
     private Animation doorOpen;
     private Animation doorClose;
-    private AnimationSet dragonAnimation, centapideAnimation, wormAnimation, slimeAnimation;
+    private AnimationSet dragonAnimation, centapideAnimation, wormAnimation, slimeAnimation, birdAnimation;
    
 
 
@@ -87,6 +87,17 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
                 monAtlas.findRegion("centapide_stand_south"),
                 monAtlas.findRegion("centapide_stand_east"),
                 monAtlas.findRegion("centapide_stand_west")
+        		);
+        
+        birdAnimation = new AnimationSet(
+        		new Animation(0.3f/2f, monAtlas.findRegions("bird_walk_north"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, monAtlas.findRegions("bird_walk_south"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, monAtlas.findRegions("bird_walk_east"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, monAtlas.findRegions("bird_walk_west"), Animation.PlayMode.LOOP_PINGPONG),
+                monAtlas.findRegion("bird_stand_north"),
+                monAtlas.findRegion("bird_stand_south"),
+                monAtlas.findRegion("bird_stand_east"),
+                monAtlas.findRegion("bird_stand_west")
         		);
         		
         		
@@ -142,6 +153,10 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
                         break;
                     case "addCentapide":
                     	addCentapide(tokens[1], tokens[2]);
+                    	break;
+                    	
+                    case "addBird":
+                    	addBird(tokens[1], tokens[2]);
                     	break;
                     case "addWorm":
                     	addWorm(tokens[1], tokens[2]);
@@ -214,10 +229,31 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
 
     }
     
+    private void addBird(String stringX, String stringY) {
+    	int x = Integer.parseInt(stringX);
+    	int y = Integer.parseInt(stringY);
+    	
+    	Actor mon = new Actor(world, x, y, birdAnimation);
+    	mon.setLevel(5);
+    	mon.setName("Bird");
+    	LinearDialogueNode node1 = new LinearDialogueNode("Gwak Gwak!!!", 0);
+
+    	 Dialogue dialogue = new Dialogue();
+         dialogue.addNode(node1);
+
+
+         mon.setDialogue(dialogue);
+         mon.setSizeX(1);
+         mon.setSizeY(1.5f);
+
+         LimitedWalkingBehavior brain = new LimitedWalkingBehavior(mon, 1, 1, 0, 0, 0.3f, 1f, new Random());
+         world.addActor(mon, brain);
+    }
+    
     private void addCentapide(String stringX, String stringY) {
     	int x = Integer.parseInt(stringX);
     	int y = Integer.parseInt(stringY);
-    	System.out.println("fuck");
+    	
     	Actor mon = new Actor(world, x, y, centapideAnimation);
     	mon.setLevel(10);
     	mon.setName("Centapide");
@@ -241,8 +277,8 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
     private void addWorm(String stringX, String stringY) {
     	int x = Integer.parseInt(stringX);
     	int y = Integer.parseInt(stringY);
-    	Actor mon = new Actor(world, x, y, centapideAnimation);
-    	mon.setLevel(5);
+    	Actor mon = new Actor(world, x, y, wormAnimation);
+    	mon.setLevel(15);
     	mon.setName("Worm");
     	 LinearDialogueNode node1 = new LinearDialogueNode("I believe I can Farmmmm", 0);
 

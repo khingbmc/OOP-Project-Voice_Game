@@ -63,10 +63,7 @@ public class BattleMechanics {
         int level = user.getLevel();
         float base = move.getPower();
         float modifier = MathUtils.random(0.85f, 1.00f);
-        if (isCritical) {
-            modifier = modifier * 2f;
-            message = "A critical hit!";
-        }
+        
 
         int damage = (int) ((  (2f*level+10f)/250f   *   (float)attack/defence   * base + 2   ) * modifier);
 

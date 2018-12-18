@@ -131,6 +131,7 @@ public class Actor implements YSortable {
             }
             return false;
         }
+        
         // edge of world test
         if (x+dir.getDx() >= world.getMap().getWidth() || x+dir.getDx() < 0 || y+dir.getDy() >= world.getMap().getHeight() || y+dir.getDy() < 0) {
             reface(dir);

@@ -27,7 +27,15 @@ public class Monster {
     public Monster(String name, Texture image, int hp) {
         this.name = name;
         this.image = image;
-        this.level = 5;
+        if(name.equals("Brian")) {
+        	this.level = 20;
+        }else if(name.equals("Bird")) {
+        	this.level = 5;
+        }else {
+        	this.level = 40;
+        }
+        
+        
 
         /* init all stats to 1 */
         stats = new HashMap<STAT, Integer>();

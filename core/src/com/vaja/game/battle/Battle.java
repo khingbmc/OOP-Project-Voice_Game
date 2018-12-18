@@ -7,13 +7,13 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import com.badlogic.gdx.Gdx;
 import com.vaja.game.battle.animation.FaintingAnimation;
 import com.vaja.game.battle.animation.StartBattleAnimation;
 import com.vaja.game.battle.event.*;
 import com.vaja.game.battle.move.Move;
 import com.vaja.game.model.Monster;
-
-
+import com.vaja.screen.GameScreen;
 import com.vaja.voice.*;
 
 /**
@@ -39,6 +39,8 @@ public class Battle implements BattleEventQueuer {
     public void queueEvent(BattleEvent event) {
         this.eventPlayer.queueEvent(event);
     }
+    
+    GameScreen loadGame;
 
     private STATE state;
     
@@ -196,7 +198,7 @@ public class Battle implements BattleEventQueuer {
         		}
         	}
         	
-        	if(move.getName().toUpperCase().equals("WATER GUN")) {
+        	if(move.getName().equals("Fus Ro Dah!")) {
         		
     			
 				queueEvent(new TextEvent(battleUser.getName()+" used\n"+move.getName().toUpperCase()+"!", 0.5f));
@@ -256,6 +258,8 @@ public class Battle implements BattleEventQueuer {
             if (!anyoneAlive) {
             	queueEvent(new TextEvent("You're Die ", true));
                 this.state = STATE.LOSE;
+                System.out.println(this.state);
+//                loadGame.setState("Con/tinue");
             } 
         } else if (opponent.isFainted()) {
             queueEvent(new AnimationBattleEvent(BATTLE_PARTY.OPPONENT, new FaintingAnimation()));
