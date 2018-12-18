@@ -55,6 +55,9 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
 
     private HashMap<String, World> worlds = new HashMap<String, World>();
     private World world;
+    
+    private String state;
+    
     private PlayerActor player;
     private Camera camera;
     private Dialogue dialogue;
@@ -98,36 +101,117 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
                 atlas.findRegion("brendan_stand_north"),
                 atlas.findRegion("brendan_stand_south"),
                 atlas.findRegion("brendan_stand_east"),
-                atlas.findRegion("brendan_stand_west")
+                atlas.findRegion("brendan_stand_west") 
         );
 
         Array<World> loadWorlds = app.getAssetManager().getAll(World.class, new Array<World>());
         for (World w : loadWorlds) {
             worlds.put(w.getName(), w);
         }
-        world = worlds.get("first_town");
+        state = "save1";
+        if (state.equals("save1")) {
+            world = worlds.get("save1");
 
-        camera = new Camera();
-        player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
-        player.setSizeX(1);
-        player.setSizeY(1.5f);
-        player.setLevel(7);
-        world.addActor(player);
+            camera = new Camera();
+            player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
+            player.setSizeX(1);
+            player.setSizeY(1.5f);
+            player.setLevel(7);
+            world.addActor(player);
 
-        initUI();
+            initUI();
 
-        multiplexer = new InputMultiplexer();
+            multiplexer = new InputMultiplexer();
 
-        playerController = new ActorMovementControl(player);
-        dialogueController = new DialogueController(dialogueBox, optionsBox);
-        interactionController = new InteractionController(player, dialogueController);
-        multiplexer.addProcessor(0, dialogueController);
-        multiplexer.addProcessor(1, playerController);
-        multiplexer.addProcessor(2, interactionController);
+            playerController = new ActorMovementControl(player);
+            dialogueController = new DialogueController(dialogueBox, optionsBox);
+            interactionController = new InteractionController(player, dialogueController);
+            multiplexer.addProcessor(0, dialogueController);
+            multiplexer.addProcessor(1, playerController);
+            multiplexer.addProcessor(2, interactionController);
 
-        worldRenderer = new WorldRenderer(getApp().getAssetManager(), world, getApp());
-        queueRenderer = new EventQueueRenderer(app.getSkin(), eventQueue);
-        tileInfoRenderer = new TileInfoRenderer(world, camera);
+            worldRenderer = new WorldRenderer(getApp().getAssetManager(), world, getApp());
+            queueRenderer = new EventQueueRenderer(app.getSkin(), eventQueue);
+            tileInfoRenderer = new TileInfoRenderer(world, camera);
+        }
+
+        if (state.equals("save2")) {
+            world = worlds.get("save2");
+
+            camera = new Camera();
+            player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
+            player.setSizeX(1);
+            player.setSizeY(1.5f);
+            player.setLevel(7);
+            world.addActor(player);
+
+            initUI();
+
+            multiplexer = new InputMultiplexer();
+
+            playerController = new ActorMovementControl(player);
+            dialogueController = new DialogueController(dialogueBox, optionsBox);
+            interactionController = new InteractionController(player, dialogueController);
+            multiplexer.addProcessor(0, dialogueController);
+            multiplexer.addProcessor(1, playerController);
+            multiplexer.addProcessor(2, interactionController);
+
+            worldRenderer = new WorldRenderer(getApp().getAssetManager(), world, getApp());
+            queueRenderer = new EventQueueRenderer(app.getSkin(), eventQueue);
+            tileInfoRenderer = new TileInfoRenderer(world, camera);
+        }
+
+        if (state.equals("save3")) {
+            world = worlds.get("save3");
+
+            camera = new Camera();
+            player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
+            player.setSizeX(1);
+            player.setSizeY(1.5f);
+            player.setLevel(7);
+            world.addActor(player);
+
+            initUI();
+
+            multiplexer = new InputMultiplexer();
+
+            playerController = new ActorMovementControl(player);
+            dialogueController = new DialogueController(dialogueBox, optionsBox);
+            interactionController = new InteractionController(player, dialogueController);
+            multiplexer.addProcessor(0, dialogueController);
+            multiplexer.addProcessor(1, playerController);
+            multiplexer.addProcessor(2, interactionController);
+
+            worldRenderer = new WorldRenderer(getApp().getAssetManager(), world, getApp());
+            queueRenderer = new EventQueueRenderer(app.getSkin(), eventQueue);
+            tileInfoRenderer = new TileInfoRenderer(world, camera);
+        }
+        if (state.equals("first")) {
+            world = worlds.get("first_town");
+
+            camera = new Camera();
+            player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
+            player.setSizeX(1);
+            player.setSizeY(1.5f);
+            player.setLevel(7);
+            world.addActor(player);
+
+            initUI();
+
+            multiplexer = new InputMultiplexer();
+
+            playerController = new ActorMovementControl(player);
+            dialogueController = new DialogueController(dialogueBox, optionsBox);
+            interactionController = new InteractionController(player, dialogueController);
+            multiplexer.addProcessor(0, dialogueController);
+            multiplexer.addProcessor(1, playerController);
+            multiplexer.addProcessor(2, interactionController);
+
+            worldRenderer = new WorldRenderer(getApp().getAssetManager(), world, getApp());
+            queueRenderer = new EventQueueRenderer(app.getSkin(), eventQueue);
+            tileInfoRenderer = new TileInfoRenderer(world, camera); 
+        }
+        
     }
 
     @Override
