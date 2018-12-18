@@ -93,6 +93,13 @@ public class BattleScreen extends AbstractScreen implements BattleEventPlayer {
             this.monster = app.getAssetManager().get("res/graphics/monster/dragon_stand_west.png", Texture.class);
 
         }
+        if(monsterP.getName().equals("Centapide")) {
+        	this.monster = app.getAssetManager().get("res/graphics/monster/worm_stand_west.png",Texture.class);
+        }
+        if(monsterP.getName().equals("Worm")) {
+        	this.monster = app.getAssetManager().get("res/graphics/monster/centapide_stand_west.png",Texture.class);
+        }
+        
 
 
 
@@ -210,6 +217,7 @@ public class BattleScreen extends AbstractScreen implements BattleEventPlayer {
 
         uiStage.draw();
     }
+    
 
     @Override
     public void resize(int width, int height) {

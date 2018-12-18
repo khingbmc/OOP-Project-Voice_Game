@@ -64,6 +64,7 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
 
     private Actor monster;
 
+    
     private BattleScreen battleScreen;
 
     /* cutscenes */
@@ -108,7 +109,7 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
         for (World w : loadWorlds) {
             worlds.put(w.getName(), w);
         }
-        state = "save1";
+        state = "first";
         if (state.equals("save1")) {
             world = worlds.get("save1");
 
@@ -116,7 +117,7 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
             player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
             player.setSizeX(1);
             player.setSizeY(1.5f);
-            player.setLevel(7);
+            player.setLevel(15);
             world.addActor(player);
 
             initUI();
@@ -142,7 +143,7 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
             player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
             player.setSizeX(1);
             player.setSizeY(1.5f);
-            player.setLevel(7);
+            player.setLevel(15);
             world.addActor(player);
 
             initUI();
@@ -168,7 +169,7 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
             player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
             player.setSizeX(1);
             player.setSizeY(1.5f);
-            player.setLevel(7);
+            player.setLevel(15);
             world.addActor(player);
 
             initUI();
@@ -193,7 +194,7 @@ public class GameScreen extends AbstractScreen implements CutscenePlayer {
             player = new PlayerActor(world, world.getSafeX(), world.getSafeY(), animations, this);
             player.setSizeX(1);
             player.setSizeY(1.5f);
-            player.setLevel(7);
+            player.setLevel(15);
             world.addActor(player);
 
             initUI();

@@ -132,6 +132,7 @@ public class BattleRenderer {
                 playerHeight = animation.getSecondaryHeight();
             }
         }
+        
 
         /* render background */
         batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

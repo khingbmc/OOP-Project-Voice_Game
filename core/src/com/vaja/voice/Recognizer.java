@@ -116,8 +116,9 @@ public class Recognizer {
 				recognizer.startRecognition(true);
 				
 				//Information			
-				logger.log(Level.INFO, "You can start to speak...\n");
 				JOptionPane.showMessageDialog(null, "You can start to speak...");
+				logger.log(Level.INFO, "You can start to speak...\n");
+				
 				
 				try {
 					while (speechRecognizerThreadRunning) {

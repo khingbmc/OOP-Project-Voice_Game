@@ -110,8 +110,9 @@ public class Vaja extends Game {
         assetManager.load("res/graphics/pokemon/slowpoke.png", Texture.class);
         assetManager.load("res/graphics_packed/monster/monster_textures.atlas", TextureAtlas.class);
         assetManager.load("res/graphics/monster/dragon_stand_west.png", Texture.class);
-
-
+        assetManager.load("res/graphics/monster/worm_stand_west.png",Texture.class);
+        assetManager.load("res/graphics/monster/centapide_stand_west.png",Texture.class);
+        
         assetManager.load("res/graphics_unpacked/tiles/brendan_stand_west.png", Texture.class);
 
         for (int i = 0; i < 32; i++) {

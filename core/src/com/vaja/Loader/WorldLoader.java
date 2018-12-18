@@ -40,7 +40,7 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
     private Animation flowerAnimation;
     private Animation doorOpen;
     private Animation doorClose;
-    private AnimationSet dragonAnimation;
+    private AnimationSet dragonAnimation, centapideAnimation, wormAnimation, slimeAnimation;
    
 
 
@@ -66,6 +66,30 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
                 monAtlas.findRegion("dragon_stand_east"),
                 monAtlas.findRegion("dragon_stand_west")
         );
+        
+        centapideAnimation = new AnimationSet(
+        		new Animation(0.3f/2f, monAtlas.findRegions("worm_walk_north"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, monAtlas.findRegions("worm_walk_south"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, monAtlas.findRegions("worm_walk_east"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, monAtlas.findRegions("worm_walk_west"), Animation.PlayMode.LOOP_PINGPONG),
+                monAtlas.findRegion("worm_stand_north"),
+                monAtlas.findRegion("worm_stand_south"),
+                monAtlas.findRegion("worm_stand_east"),
+                monAtlas.findRegion("worm_stand_west")
+        		);
+        
+        wormAnimation = new AnimationSet(
+        		new Animation(0.3f/2f, monAtlas.findRegions("centapide_walk_north"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, monAtlas.findRegions("centapide_walk_south"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, monAtlas.findRegions("centapide_walk_east"), Animation.PlayMode.LOOP_PINGPONG),
+                new Animation(0.3f/2f, monAtlas.findRegions("centapide_walk_west"), Animation.PlayMode.LOOP_PINGPONG),
+                monAtlas.findRegion("centapide_stand_north"),
+                monAtlas.findRegion("centapide_stand_south"),
+                monAtlas.findRegion("centapide_stand_east"),
+                monAtlas.findRegion("centapide_stand_west")
+        		);
+        		
+        		
 
         BufferedReader reader = new BufferedReader(file.reader());
         int currentLine = 0;
@@ -116,6 +140,12 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
                         addDragon(tokens[1], tokens[2]);
 
                         break;
+                    case "addCentapide":
+                    	addCentapide(tokens[1], tokens[2]);
+                    	break;
+                    case "addWorm":
+                    	addWorm(tokens[1], tokens[2]);
+                    	break;
                     case "teleport":
                         teleport(asset, tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7], tokens[8]);
                         break;
@@ -165,7 +195,7 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
         int x = Integer.parseInt(stringX);
         int y = Integer.parseInt(stringY);
         Actor mon = new Actor(world, x, y, dragonAnimation);
-        mon.setLevel(5);
+        mon.setLevel(20);
         mon.setName("Dark Dragon");
 
         LinearDialogueNode node1 = new LinearDialogueNode("Don't translate because it a Dragon Language", 0);
@@ -182,6 +212,52 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
         world.addActor(mon, brain);
 
 
+    }
+    
+    private void addCentapide(String stringX, String stringY) {
+    	int x = Integer.parseInt(stringX);
+    	int y = Integer.parseInt(stringY);
+    	System.out.println("fuck");
+    	Actor mon = new Actor(world, x, y, centapideAnimation);
+    	mon.setLevel(10);
+    	mon.setName("Centapide");
+    	LinearDialogueNode node1 = new LinearDialogueNode("Who are you!Pzzz Pzzz", 0);
+
+    	 Dialogue dialogue = new Dialogue();
+         dialogue.addNode(node1);
+
+
+         mon.setDialogue(dialogue);
+         mon.setSizeX(2);
+         mon.setSizeY(2.5f);
+
+         LimitedWalkingBehavior brain = new LimitedWalkingBehavior(mon, 1, 1, 0, 0, 0.3f, 1f, new Random());
+         world.addActor(mon, brain);
+    	
+    	
+    	
+    }
+    
+    private void addWorm(String stringX, String stringY) {
+    	int x = Integer.parseInt(stringX);
+    	int y = Integer.parseInt(stringY);
+    	Actor mon = new Actor(world, x, y, centapideAnimation);
+    	mon.setLevel(5);
+    	mon.setName("Worm");
+    	 LinearDialogueNode node1 = new LinearDialogueNode("I believe I can Farmmmm", 0);
+
+    	 Dialogue dialogue = new Dialogue();
+         dialogue.addNode(node1);
+
+
+         mon.setDialogue(dialogue);
+         mon.setSizeX(2);
+         mon.setSizeY(2.5f);
+
+         LimitedWalkingBehavior brain = new LimitedWalkingBehavior(mon, 1, 1, 0, 0, 0.3f, 1f, new Random());
+         world.addActor(mon, brain);
+    	
+    	
     }
 
 
