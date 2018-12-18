@@ -21,7 +21,7 @@ public class MoveDB {
                         MOVE_CATEGORY.PHYSICAL,
                         25,
                         1f,
-                        35,
+                        25,
                         "Tackle",
                         "Charges the foe with a full-body tackle."),
                 ChargeAnimation.class));
@@ -29,9 +29,9 @@ public class MoveDB {
                 new MoveSpecification(
                         MOVE_TYPE.WATER,
                         MOVE_CATEGORY.SPECIAL,
-                        50,
+                        30,
                         1f,
-                        25,
+                        30,
                         "Fus Ro Dah!",
                         "Ahhhhhhhhhhhhh"),
                 ChargeAnimation.class));
@@ -39,9 +39,9 @@ public class MoveDB {
                 new MoveSpecification(
                         MOVE_TYPE.NORMAL,
                         MOVE_CATEGORY.PHYSICAL,
-                        75,
+                        50,
                         1f,
-                        35,
+                        50,
                         "Ha do Ken!",
                         "Ha do ken"),
                 ChargeAnimation.class));
@@ -49,9 +49,9 @@ public class MoveDB {
                 new MoveSpecification(
                         MOVE_TYPE.DRAGON,
                         MOVE_CATEGORY.PHYSICAL,
-                        100,
+                        70,
                         1f,
-                        15,
+                        70,
                         "Khame Khame Ha!",
                         "Boom!"),
                 ChargeAnimation.class));

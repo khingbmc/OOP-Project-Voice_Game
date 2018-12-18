@@ -28,11 +28,15 @@ public class Monster {
         this.name = name;
         this.image = image;
         if(name.equals("Brian")) {
-        	this.level = 20;
+        	this.level = 7;
         }else if(name.equals("Bird")) {
         	this.level = 5;
+        }else if(name.equals("Centapide")){
+        	this.level = 20;
+        }else if(name.equals("Worm")) {
+        	this.level = 50;
         }else {
-        	this.level = 40;
+        	this.level = 100;
         }
         
         
@@ -50,7 +54,11 @@ public class Monster {
         return image;
     }
 
-    public int getCurrentHitpoints() {
+    public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getCurrentHitpoints() {
         return currentHitpoints;
     }
 

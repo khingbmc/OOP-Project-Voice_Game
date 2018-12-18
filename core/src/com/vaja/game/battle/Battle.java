@@ -265,6 +265,7 @@ public class Battle implements BattleEventQueuer {
             queueEvent(new AnimationBattleEvent(BATTLE_PARTY.OPPONENT, new FaintingAnimation()));
             queueEvent(new TextEvent("Congratulations! You Win!", true));
             this.state = STATE.WIN;
+            this.player.setLevel((int) (this.player.getLevel()+this.opponent.getLevel()));
         }
     }
 
