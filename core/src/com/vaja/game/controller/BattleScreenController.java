@@ -51,7 +51,7 @@ public class BattleScreenController extends InputAdapter {
             } else if (keycode == Input.Keys.X) {
                 if (optionBox.getIndex() == 0) { // YES selected
 
-
+                	
                     /*
                      * WRONG
                      */
@@ -72,11 +72,12 @@ public class BattleScreenController extends InputAdapter {
         }
         if (moveSelect.isVisible()) {
             if (keycode == Input.Keys.X) {
+            	
                 int selection = moveSelect.getSelection();
                 if (battle.getPlayerPokemon().getMove(selection) == null) {
                     queue.add(new TextEvent("No such move...", 0.5f));
                 } else {
-                    battle.progress(moveSelect.getSelection());
+                	battle.progress(moveSelect.getSelection());
                     endTurn();
                 }
             } else if (keycode == Input.Keys.UP) {

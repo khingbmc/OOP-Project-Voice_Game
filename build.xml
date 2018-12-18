@@ -59,9 +59,9 @@ NOTE:  Before running the tests, you must have already built
     <!-- *                                                        * -->
     <!-- ********************************************************** -->
     <target name="run"
-	    description="Start Recognition"
+	    description="Runs the hello world demo."
 	    depends="all">
-	    <java classname="com.vaja.voice.SpeechRecognize"
+	    <java classname="demo.sphinx.helloworld.HelloWorld"
 	          fork="true"
 		  maxmemory="128m">
                   <sysproperty key="frontend" value="epFrontEnd"/>

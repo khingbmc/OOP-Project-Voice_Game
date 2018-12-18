@@ -1,105 +1,36 @@
 package com.vaja.voice;
 
-import edu.cmu.sphinx.frontend.util.Microphone;
-
-import edu.cmu.sphinx.recognizer.Recognizer;
-import edu.cmu.sphinx.result.Result;
-import edu.cmu.sphinx.util.props.ConfigurationManager;
-import edu.cmu.sphinx.util.props.PropertyException;
-
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
-
-/**
- * A simple HelloWorld demo showing a simple speech application 
- * built using Sphinx-4. This application uses the Sphinx-4 endpointer,
- * which automatically segments incoming audio into utterances and silences.
- */
 public class SpeechRecognize {
+	public static void main(String[] args) {
+	    String[] arg = new String[]{"-u root", "-h localhost"};
 
-    /**
-     * Main method for running the HelloWorld demo.
-     */
-	
-	private String resultText;
-	
-	private Recognizer recognizer;
-	private Microphone microphone;
-	private String[] message;
-	
-	public SpeechRecognize() {
-		message = new String[2];
-		try {
-            URL url;
-            
-            url = SpeechRecognize.class.getResource("helloworld.config.xml");
-           
+	    try {
+	        String ss = null;
+	        Runtime obj = null;
+	        Process p = Runtime.getRuntime().exec("Terminal.exe /c start dir ");
+	        BufferedWriter writeer = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+	        writeer.write("dir");
+	        writeer.flush();
+	        BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+	        BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+	        System.out.println("Here is the standard output of the command:\n");
+	        while ((ss = stdInput.readLine()) != null) {
+	            System.out.println(ss);
+	        }
+	        System.out.println("Here is the standard error of the command (if any):\n");
+	        while ((ss = stdError.readLine()) != null) {
+	            System.out.println(ss);
+	        }
 
-            System.out.println("Loading...");
-
-            ConfigurationManager cm = new ConfigurationManager(url);
-
-            recognizer = (Recognizer) cm.lookup("recognizer");
-            microphone = (Microphone) cm.lookup("microphone");
-
-
-            /* allocate the resource necessary for the recognizer */
-            recognizer.allocate();
-
-            /* the microphone will keep recording until the program exits */
-	    if (microphone.startRecording()) {
-
-		this.message[0] = "Start speaking.(dog | love | ant | sexy)";
-
-		
-		this.message[1] = "Waiting....";
-		
-		
-
-                    
-		    Result result = recognizer.recognize();
-		    
-		    if (result != null) {
-		    	
-			resultText = result.getBestFinalResultNoFiller();
-			System.out.println(resultText);
-			
-		    } else {
-			System.out.println("I can't hear what you said.\n");
-		    }
-		
-	    } else {
-		System.out.println("Cannot start microphone.");
-		recognizer.deallocate();
-		System.exit(1);
+	    } catch (IOException e) {
+	        System.out.println("FROM CATCH" + e.toString());
 	    }
-        } catch (IOException e) {
-            System.err.println("Problem when loading HelloWorld: " + e);
-            e.printStackTrace();
-        } catch (PropertyException e) {
-            System.err.println("Problem configuring HelloWorld: " + e);
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            System.err.println("Problem creating HelloWorld: " + e);
-            e.printStackTrace();
-        }
-    }
-	
-	
-	
-    public String getResultText() {
-		return resultText;
+
 	}
-
-
-
-	public String[] getMessage() {
-		return message;
-	}
-
-	
-
-	
 }
